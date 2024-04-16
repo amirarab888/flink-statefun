@@ -63,7 +63,11 @@ under the License.
             <artifactId>statefun-flink-extensions</artifactId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>statefun-flink-io-bundle</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- flink runtime -->
         <dependency>
             <groupId>org.apache.flink</groupId>

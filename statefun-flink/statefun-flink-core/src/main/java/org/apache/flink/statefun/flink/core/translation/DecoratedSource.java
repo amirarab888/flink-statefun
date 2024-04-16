@@ -17,6 +17,7 @@
  */
 package org.apache.flink.statefun.flink.core.translation;
 
+import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
 import org.apache.flink.statefun.sdk.io.IngressIdentifier;
 import org.apache.flink.statefun.sdk.io.IngressSpec;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
@@ -27,21 +28,34 @@ final class DecoratedSource {
   final String uid;
 
   final SourceFunction<?> source;
+  final DeltaSourceWrapper connectorSource;
 
-  private DecoratedSource(String name, String uid, SourceFunction<?> source) {
+  private DecoratedSource(String name, String uid, SourceFunction<?> source, DeltaSourceWrapper connectorSource) {
     this.name = name;
     this.uid = uid;
     this.source = source;
+    this.connectorSource = connectorSource;
   }
 
   public static DecoratedSource of(IngressSpec<?> spec, SourceFunction<?> source) {
     IngressIdentifier<?> identifier = spec.id();
     String name = String.format("%s-%s-ingress", identifier.namespace(), identifier.name());
     String uid =
-        String.format(
-            "%s-%s-%s-%s-ingress",
-            spec.type().namespace(), spec.type().type(), identifier.namespace(), identifier.name());
+            String.format(
+                    "%s-%s-%s-%s-ingress",
+                    spec.type().namespace(), spec.type().type(), identifier.namespace(), identifier.name());
 
-    return new DecoratedSource(name, uid, source);
+    return new DecoratedSource(name, uid, source, null);
+  }
+
+  public static DecoratedSource of(IngressSpec<?> spec, DeltaSourceWrapper connectorSource) {
+    IngressIdentifier<?> identifier = spec.id();
+    String name = String.format("%s-%s-ingress", identifier.namespace(), identifier.name());
+    String uid =
+            String.format(
+                    "%s-%s-%s-%s-ingress",
+                    spec.type().namespace(), spec.type().type(), identifier.namespace(), identifier.name());
+    return new DecoratedSource(name, uid, null,  connectorSource);
   }
 }
+

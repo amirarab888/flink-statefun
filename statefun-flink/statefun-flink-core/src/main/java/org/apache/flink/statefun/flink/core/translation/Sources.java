@@ -23,18 +23,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.dag.Transformation;
 import org.apache.flink.statefun.flink.common.UnimplementedTypeInfo;
+import org.apache.flink.statefun.flink.core.RowDataToMessageMapFunction;
 import org.apache.flink.statefun.flink.core.StatefulFunctionsConfig;
 import org.apache.flink.statefun.flink.core.StatefulFunctionsUniverse;
 import org.apache.flink.statefun.flink.core.message.Message;
 import org.apache.flink.statefun.flink.core.message.RoutableMessage;
 import org.apache.flink.statefun.flink.core.types.StaticallyRegisteredTypes;
+import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
+import org.apache.flink.statefun.flink.core.jsonnodegenerator.DefaultJsonNodeGeneratorFactory;
 import org.apache.flink.statefun.sdk.io.IngressIdentifier;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
+import org.apache.flink.table.data.RowData;
+
 
 final class Sources {
 
@@ -45,23 +52,23 @@ final class Sources {
   }
 
   static Sources create(
-      StreamExecutionEnvironment env,
-      StatefulFunctionsUniverse universe,
-      StatefulFunctionsConfig configuration) {
+          StreamExecutionEnvironment env,
+          StatefulFunctionsUniverse universe,
+          StatefulFunctionsConfig configuration) {
     final Map<IngressIdentifier<?>, DecoratedSource> sourceFunctions =
-        ingressToSourceFunction(universe);
+            ingressToSourceFunction(universe);
 
     final Map<IngressIdentifier<?>, DataStream<?>> sourceStreams =
-        sourceFunctionToDataStream(env, sourceFunctions);
+            sourceFunctionToDataStream(env, sourceFunctions);
 
     final Map<IngressIdentifier<?>, DataStream<Message>> envelopeSources =
-        dataStreamToEnvelopStream(universe, sourceStreams, configuration);
+            dataStreamToEnvelopStream(universe, sourceStreams, configuration);
 
     return new Sources(union(envelopeSources.values()));
   }
 
   static Sources create(
-      StaticallyRegisteredTypes types, Iterable<DataStream<RoutableMessage>> envelopeSources) {
+          StaticallyRegisteredTypes types, Iterable<DataStream<RoutableMessage>> envelopeSources) {
     TypeInformation<Message> messageOutputType = types.registerType(Message.class);
 
     List<DataStream<Message>> messages = new ArrayList<>();
@@ -78,32 +85,38 @@ final class Sources {
   }
 
   private static Map<IngressIdentifier<?>, DataStream<Message>> dataStreamToEnvelopStream(
-      StatefulFunctionsUniverse universe,
-      Map<IngressIdentifier<?>, DataStream<?>> sourceStreams,
-      StatefulFunctionsConfig configuration) {
+          StatefulFunctionsUniverse universe,
+          Map<IngressIdentifier<?>, DataStream<?>> sourceStreams,
+          StatefulFunctionsConfig configuration) {
 
     RouterTranslator routerTranslator = new RouterTranslator(universe, configuration);
     return routerTranslator.translate(sourceStreams);
   }
 
   private static Map<IngressIdentifier<?>, DataStream<?>> sourceFunctionToDataStream(
-      StreamExecutionEnvironment env, Map<IngressIdentifier<?>, DecoratedSource> sourceFunctions) {
+          StreamExecutionEnvironment env, Map<IngressIdentifier<?>, DecoratedSource> sourceFunctions) {
 
     Map<IngressIdentifier<?>, DataStream<?>> sourceStreams = new HashMap<>();
     sourceFunctions.forEach(
-        (id, sourceFunction) -> {
-          DataStreamSource<?> stream = env.addSource(sourceFunction.source);
+            (id, sourceFunction) -> {
+              SingleOutputStreamOperator<?> stream;
+              DeltaSourceWrapper sourceWrapper  = sourceFunction.connectorSource;
+              if (sourceWrapper == null) {
+                stream = env.addSource(sourceFunction.source);
+              } else {
+                DataStreamSource<RowData> rowDataStream = env.fromSource(sourceWrapper.getDeltaSource(), WatermarkStrategy.noWatermarks(), sourceFunction.name);
+                stream = rowDataStream.map(new RowDataToMessageMapFunction(sourceWrapper.getValueType(), sourceWrapper.getTableFields(), new DefaultJsonNodeGeneratorFactory()));
+              }
+              stream.name(sourceFunction.name);
+              stream.uid(sourceFunction.uid);
 
-          stream.name(sourceFunction.name);
-          stream.uid(sourceFunction.uid);
-
-          // we erase whatever type information present at the source, since the source is always
-          // chained to the IngressRouterFlatMap, and that operator is always emitting records of
-          // type
-          // Message.
-          eraseTypeInformation(stream.getTransformation());
-          sourceStreams.put(id, stream);
-        });
+              // we erase whatever type information present at the source, since the source is always
+              // chained to the IngressRouterFlatMap, and that operator is always emitting records of
+              // type
+              // Message.
+              eraseTypeInformation(stream.getTransformation());
+              sourceStreams.put(id, stream);
+            });
     return sourceStreams;
   }
 
@@ -112,7 +125,7 @@ final class Sources {
   }
 
   private static Map<IngressIdentifier<?>, DecoratedSource> ingressToSourceFunction(
-      StatefulFunctionsUniverse universe) {
+          StatefulFunctionsUniverse universe) {
     IngressToSourceFunctionTranslator translator = new IngressToSourceFunctionTranslator(universe);
     return translator.translate();
   }

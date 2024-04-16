@@ -29,6 +29,8 @@ public interface FlinkIoModule {
 
     void bindSourceProvider(IngressType type, SourceProvider provider);
 
+    void bindDeltaConnectorSourceProvider(IngressType type, DeltaConnectorSourceProvider provider);
+
     void bindSinkProvider(EgressType type, SinkProvider provider);
   }
 }

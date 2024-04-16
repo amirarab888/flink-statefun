@@ -24,7 +24,7 @@ final class StatefulFunctionsUniverseValidator {
     if (statefulFunctionsUniverse.ingress().isEmpty()) {
       throw new IllegalStateException("There are no ingress defined.");
     }
-    if (statefulFunctionsUniverse.sources().isEmpty()) {
+    if (statefulFunctionsUniverse.sources().isEmpty() && statefulFunctionsUniverse.getDeltaConnectorSources().isEmpty()) {
       throw new IllegalStateException("There are no source providers defined.");
     }
     if (statefulFunctionsUniverse.routers().isEmpty()) {

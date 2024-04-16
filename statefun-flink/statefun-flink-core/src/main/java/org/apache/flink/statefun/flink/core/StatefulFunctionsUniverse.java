@@ -27,6 +27,7 @@ import org.apache.flink.statefun.extensions.ExtensionModule;
 import org.apache.flink.statefun.flink.core.message.MessageFactoryKey;
 import org.apache.flink.statefun.flink.core.spi.ExtensionResolver;
 import org.apache.flink.statefun.flink.core.types.StaticallyRegisteredTypes;
+import org.apache.flink.statefun.flink.io.spi.DeltaConnectorSourceProvider;
 import org.apache.flink.statefun.flink.io.spi.FlinkIoModule;
 import org.apache.flink.statefun.flink.io.spi.SinkProvider;
 import org.apache.flink.statefun.flink.io.spi.SourceProvider;
@@ -44,7 +45,7 @@ import org.apache.flink.statefun.sdk.io.Router;
 import org.apache.flink.statefun.sdk.spi.StatefulFunctionModule;
 
 public final class StatefulFunctionsUniverse
-    implements StatefulFunctionModule.Binder,
+        implements StatefulFunctionModule.Binder,
         FlinkIoModule.Binder,
         ExtensionModule.Binder,
         ExtensionResolver {
@@ -53,9 +54,10 @@ public final class StatefulFunctionsUniverse
   private final Map<EgressIdentifier<?>, EgressSpec<?>> egress = new HashMap<>();
   private final Map<IngressIdentifier<?>, List<Router<?>>> routers = new HashMap<>();
   private final Map<FunctionType, StatefulFunctionProvider> specificFunctionProviders =
-      new HashMap<>();
+          new HashMap<>();
   private final Map<String, StatefulFunctionProvider> namespaceFunctionProviders = new HashMap<>();
   private final Map<IngressType, SourceProvider> sources = new HashMap<>();
+  private final Map<IngressType, DeltaConnectorSourceProvider> deltaConnectorSources = new HashMap<>();
   private final Map<EgressType, SinkProvider> sinks = new HashMap<>();
   private final Map<TypeName, Object> extensions = new HashMap<>();
 
@@ -80,7 +82,7 @@ public final class StatefulFunctionsUniverse
     Objects.requireNonNull(router);
 
     List<Router<?>> ingressRouters =
-        routers.computeIfAbsent(ingressIdentifier, unused -> new ArrayList<>());
+            routers.computeIfAbsent(ingressIdentifier, unused -> new ArrayList<>());
     ingressRouters.add(router);
   }
 
@@ -100,7 +102,7 @@ public final class StatefulFunctionsUniverse
 
   @Override
   public void bindFunctionProvider(
-      FunctionTypeNamespaceMatcher namespaceMatcher, StatefulFunctionProvider provider) {
+          FunctionTypeNamespaceMatcher namespaceMatcher, StatefulFunctionProvider provider) {
     Objects.requireNonNull(namespaceMatcher);
     Objects.requireNonNull(provider);
     putAndThrowIfPresent(namespaceFunctionProviders, namespaceMatcher.targetNamespace(), provider);
@@ -120,6 +122,11 @@ public final class StatefulFunctionsUniverse
   }
 
   @Override
+  public void bindDeltaConnectorSourceProvider(IngressType type, DeltaConnectorSourceProvider provider) {
+    putAndThrowIfPresent(deltaConnectorSources, type, provider);
+  }
+
+  @Override
   public <T> void bindExtension(TypeName typeName, T extension) {
     putAndThrowIfPresent(extensions, typeName, extension);
   }
@@ -133,12 +140,12 @@ public final class StatefulFunctionsUniverse
 
     if (rawTypedExtension.getClass().isAssignableFrom(extensionClass)) {
       throw new IllegalStateException(
-          "Unexpected class for extension "
-              + typeName
-              + "; expected "
-              + extensionClass
-              + ", but was "
-              + rawTypedExtension.getClass());
+              "Unexpected class for extension "
+                      + typeName
+                      + "; expected "
+                      + extensionClass
+                      + ", but was "
+                      + rawTypedExtension.getClass());
     }
     return extensionClass.cast(rawTypedExtension);
   }
@@ -167,6 +174,10 @@ public final class StatefulFunctionsUniverse
     return sources;
   }
 
+  public Map<IngressType, DeltaConnectorSourceProvider> getDeltaConnectorSources() {
+    return deltaConnectorSources;
+  }
+
   public Map<EgressType, SinkProvider> sinks() {
     return sinks;
   }
@@ -185,7 +196,7 @@ public final class StatefulFunctionsUniverse
       return;
     }
     throw new IllegalStateException(
-        String.format("A binding for the key %s was previously defined.", key));
+            String.format("A binding for the key %s was previously defined.", key));
   }
 
   public MessageFactoryKey messageFactoryKey() {
