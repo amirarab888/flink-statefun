@@ -21,6 +21,8 @@ import java.util.Map;
 import java.util.Objects;
 import org.apache.flink.statefun.flink.core.StatefulFunctionsUniverse;
 import org.apache.flink.statefun.flink.core.common.Maps;
+import org.apache.flink.statefun.flink.io.spi.DeltaConnectorSourceProvider;
+import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
 import org.apache.flink.statefun.flink.io.spi.SourceProvider;
 import org.apache.flink.statefun.sdk.io.IngressIdentifier;
 import org.apache.flink.statefun.sdk.io.IngressSpec;
@@ -40,11 +42,20 @@ final class IngressToSourceFunctionTranslator {
   private DecoratedSource sourceFromSpec(IngressIdentifier<?> key, IngressSpec<?> spec) {
     SourceProvider provider = universe.sources().get(spec.type());
     if (provider == null) {
-      throw new IllegalStateException(
-          "Unable to find a source translation for ingress of type "
-              + spec.type()
-              + ", which is bound for key "
-              + key);
+      DeltaConnectorSourceProvider connectorSourceProvider = universe.getDeltaConnectorSources().get(spec.type());
+      if (connectorSourceProvider == null) {
+        throw new IllegalStateException(
+                "Unable to find a source translation for ingress of type "
+                        + spec.type()
+                        + ", which is bound for key "
+                        + key);
+      }
+      DeltaSourceWrapper connectorSource = connectorSourceProvider.forSpec(spec);
+      if (connectorSource == null) {
+        throw new NullPointerException(
+                "A source provider for type " + spec.type() + ", has produced a NULL source.");
+      }
+      return DecoratedSource.of(spec, connectorSource);
     }
     SourceFunction<?> source = provider.forSpec(spec);
     if (source == null) {
