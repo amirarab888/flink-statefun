@@ -81,7 +81,7 @@ under the License.
         <dependency>
             <groupId>io.delta</groupId>
             <artifactId>delta-flink</artifactId>
-            <version>${delta.connector.version}</version>
+            <version>${delta.flink.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>
