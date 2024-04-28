@@ -137,7 +137,6 @@ under the License.
             <groupId>io.delta</groupId>
             <artifactId>delta-flink</artifactId>
             <version>${delta.flink.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.flink</groupId>

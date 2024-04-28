@@ -7,7 +7,7 @@ import org.apache.flink.table.data.RowData;
 public class TimestampJsonNodeGenerator implements JsonNodeGenerator {
     @Override
     public JsonNode get(RowData rowData, int position) {
-        return new TextNode(rowData.getString(position).toString());
+        return new TextNode(rowData.getTimestamp(position, 6).toString());
     }
 }
 

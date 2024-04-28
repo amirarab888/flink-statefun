@@ -25,8 +25,6 @@ public class CustomDeltaLakeRouter implements Router<Message> {
         String key;
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-
-        System.out.println(hour);
         try {
             key = new ObjectMapper().readTree(((TypedValue) message).getValue().toStringUtf8()).get(idFieldName).asText() + hour;
         } catch (JsonProcessingException e) {
