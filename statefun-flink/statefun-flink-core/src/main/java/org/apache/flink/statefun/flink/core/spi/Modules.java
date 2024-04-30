@@ -50,9 +50,11 @@ public final class Modules {
     List<ExtensionModule> extensionModules = new ArrayList<>();
 
     for (ExtensionModule extensionModule : ServiceLoader.load(ExtensionModule.class)) {
+      System.out.println("Extension module: " + extensionModule.getClass() + " is loading");
       extensionModules.add(extensionModule);
     }
     for (StatefulFunctionModule provider : ServiceLoader.load(StatefulFunctionModule.class)) {
+      System.out.println("Embedded module: " + provider.getClass() + " is loading");
       statefulFunctionModules.add(provider);
     }
     String remoteModuleName = configuration.getRemoteModuleName();
@@ -60,6 +62,7 @@ public final class Modules {
       statefulFunctionModules.add(provider);
     }
     for (FlinkIoModule provider : ServiceLoader.load(FlinkIoModule.class)) {
+      System.out.println("Flink IO module: " + provider.getClass() + " is loading");
       ioModules.add(provider);
     }
     return new Modules(configuration, ioModules, statefulFunctionModules, extensionModules);
