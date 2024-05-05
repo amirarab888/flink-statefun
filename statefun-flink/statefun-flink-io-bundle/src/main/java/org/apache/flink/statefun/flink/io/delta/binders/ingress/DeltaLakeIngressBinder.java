@@ -47,7 +47,7 @@ public class DeltaLakeIngressBinder implements ComponentBinder {
         try {
             return SPEC_OBJ_MAPPER.treeToValue(specJsonNode, GenericDeltaLakeIngressSpec.class);
         } catch (JsonProcessingException e) {
-            throw new RuntimeException("Error parsing an AutoRoutableKafkaIngressSpec.", e);
+            throw new RuntimeException("Error parsing a GenericDeltaLakeIngressSpec.", e);
         }
     }
 }
