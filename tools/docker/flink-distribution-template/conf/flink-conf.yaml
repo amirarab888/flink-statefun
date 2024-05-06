@@ -45,8 +45,8 @@ state.backend.rocksdb.thread.num: 4
 state.checkpoints.dir: file:///checkpoint-dir
 state.backend.incremental: true
 fs.s3a.aws.credentials.provider: org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider
-fs.s3a.access.key: ztg2LRpgJ2qoZOG73NCO
-fs.s3a.secret.key: fUrT9RhDTmWPvvaBLTSpvoquEqFKTM5d8YufSaGe
+fs.s3a.access.key: Cm8jUZqgoQ5DufZQCVux
+fs.s3a.secret.key: yxLfXZRivfWgYlU3W9XSBwh593q4V3hTvDGkkDaG
 fs.s3a.path.style.access: true
 fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
 fs.s3a.endpoint: http://192.168.32.51:32003
