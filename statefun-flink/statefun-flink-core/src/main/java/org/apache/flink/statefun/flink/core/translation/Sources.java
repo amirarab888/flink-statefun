@@ -105,7 +105,7 @@ final class Sources {
                 stream = env.addSource(sourceFunction.source);
               } else {
                 DataStreamSource<RowData> rowDataStream = env.fromSource(sourceWrapper.getDeltaSource(), WatermarkStrategy.noWatermarks(), sourceFunction.name);
-                stream = rowDataStream.map(new RowDataToMessageMapFunction(sourceWrapper.getValueType(), sourceWrapper.getTableFields(), new DefaultJsonNodeGeneratorFactory()));
+                stream = rowDataStream.map(new RowDataToMessageMapFunction(sourceWrapper.getIdFieldName(), sourceWrapper.getRoutingConfig(), sourceWrapper.getTableFields(), new DefaultJsonNodeGeneratorFactory()));
               }
               stream.name(sourceFunction.name);
               stream.uid(sourceFunction.uid);

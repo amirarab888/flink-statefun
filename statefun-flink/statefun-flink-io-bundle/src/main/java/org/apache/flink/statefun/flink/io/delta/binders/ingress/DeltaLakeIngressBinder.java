@@ -30,8 +30,7 @@ public class DeltaLakeIngressBinder implements ComponentBinder {
         DeltaLakeIngressSpec<Message> deltaLakeIngressSpec = spec.toUniversalDeltaIngressSpec();
         remoteModuleBinder.bindIngress(deltaLakeIngressSpec);
         remoteModuleBinder.bindIngressRouter(spec.id(),
-                new CustomDeltaLakeRouter(new FunctionType(deltaLakeIngressSpec.getTargetNamespace(), deltaLakeIngressSpec.getTargetName()),
-                        deltaLakeIngressSpec.getIdFieldName()));
+                new CustomDeltaLakeRouter(new FunctionType(deltaLakeIngressSpec.getTargetNamespace(), deltaLakeIngressSpec.getTargetName())));
     }
 
 
