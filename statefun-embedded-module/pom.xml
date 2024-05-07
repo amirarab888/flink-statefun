@@ -50,6 +50,12 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.16.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>statefun-sdk-protos</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
+
 
 </project>
