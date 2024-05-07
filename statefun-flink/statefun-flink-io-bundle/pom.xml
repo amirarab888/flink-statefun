@@ -133,11 +133,11 @@ under the License.
             <version>${project.version}</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>io.delta</groupId>
-            <artifactId>delta-flink</artifactId>
-            <version>${delta.flink.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.delta</groupId>-->
+<!--            <artifactId>delta-flink</artifactId>-->
+<!--            <version>${delta.flink.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-clients</artifactId>

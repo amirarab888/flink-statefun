@@ -10,6 +10,6 @@ import java.util.Map;
 public class DeltaLakeIoModule implements FlinkIoModule {
     @Override
     public void configure(Map<String, String> map, Binder binder) {
-        binder.bindDeltaConnectorSourceProvider(Constants.DELTA_LAKE_INGRESS_TYPE, new DeltaLakeSourceProvider());
+        binder.bindSourceProvider(Constants.DELTA_LAKE_INGRESS_TYPE, new DeltaLakeSourceProvider());
     }
 }

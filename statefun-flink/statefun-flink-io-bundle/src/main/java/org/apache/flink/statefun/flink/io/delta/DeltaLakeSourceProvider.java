@@ -1,20 +1,27 @@
 package org.apache.flink.statefun.flink.io.delta;
 
 
-import io.delta.flink.source.DeltaSource;
+//import io.delta.flink.source.DeltaSource;
+import com.google.protobuf.ByteString;
 import org.apache.flink.DeltaLakeIngressSpec;
 import org.apache.flink.core.fs.Path;
+import org.apache.flink.statefun.flink.io.generated.AutoRoutable;
+import org.apache.flink.statefun.flink.io.generated.RoutingConfig;
+import org.apache.flink.statefun.flink.io.generated.TargetFunctionType;
 import org.apache.flink.statefun.flink.io.spi.DeltaConnectorSourceProvider;
-import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
+//import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
+import org.apache.flink.statefun.flink.io.spi.SourceProvider;
 import org.apache.flink.statefun.sdk.io.IngressSpec;
+import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.hadoop.conf.Configuration;
-public class DeltaLakeSourceProvider implements DeltaConnectorSourceProvider {
+
+import java.util.Random;
+
+public class DeltaLakeSourceProvider implements SourceProvider {
     @Override
-    public <T> DeltaSourceWrapper forSpec(IngressSpec<T> ingressSpec) {
-        DeltaLakeIngressSpec<T> spec = asKafkaSpec(ingressSpec);
-        Configuration configuration = getConfiguration(spec.getDeltaLakeAddress(), spec.getAccessKey(), spec.getSecretKey());
-        return new DeltaSourceWrapperImpl(DeltaSource.forContinuousRowData(new Path(spec.getTablePath()), configuration).build(),
-                spec.getIdFieldName(),spec.getTargetNamespace(), spec.getTargetName(), spec.getValueType(), spec.getTableFields());
+    public <T> SourceFunction<T> forSpec(IngressSpec<T> ingressSpec) {
+       return new DummySource();
     }
 
     private Configuration getConfiguration(String deltaLakeAddress, String accessKey, String secretKey) {
@@ -38,4 +45,28 @@ public class DeltaLakeSourceProvider implements DeltaConnectorSourceProvider {
         throw new IllegalArgumentException(String.format("Wrong type %s", ingressSpec.type()));
     }
 
+}
+
+class DummySource<T> implements SourceFunction<T>{
+
+    @Override
+    public void run(SourceContext<T> sourceContext) throws Exception {
+        Random random = new Random();
+        TargetFunctionType targetFunctionType = TargetFunctionType.newBuilder().setNamespace("com.ververica.stateful-functions").setType("greeter").build();
+        RoutingConfig routingConfig = RoutingConfig.newBuilder().setTypeUrl("dummy").addTargetFunctionTypes(targetFunctionType).build();
+        int randomNumber;
+        for (Integer i=0; i<100; i++) {
+            randomNumber = random.nextInt();
+
+            AutoRoutable typedValue = AutoRoutable.newBuilder().setId(randomNumber + "")
+                    .setConfig(routingConfig)
+                    .build();
+            sourceContext.collect((T)typedValue);
+        }
+    }
+
+    @Override
+    public void cancel() {
+
+    }
 }

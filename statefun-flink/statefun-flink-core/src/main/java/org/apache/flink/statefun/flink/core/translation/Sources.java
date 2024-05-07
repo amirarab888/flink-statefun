@@ -33,7 +33,7 @@ import org.apache.flink.statefun.flink.core.StatefulFunctionsUniverse;
 import org.apache.flink.statefun.flink.core.message.Message;
 import org.apache.flink.statefun.flink.core.message.RoutableMessage;
 import org.apache.flink.statefun.flink.core.types.StaticallyRegisteredTypes;
-import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
+//import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
 import org.apache.flink.statefun.flink.core.jsonnodegenerator.DefaultJsonNodeGeneratorFactory;
 import org.apache.flink.statefun.sdk.io.IngressIdentifier;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -100,13 +100,14 @@ final class Sources {
     sourceFunctions.forEach(
             (id, sourceFunction) -> {
               SingleOutputStreamOperator<?> stream;
-              DeltaSourceWrapper sourceWrapper  = sourceFunction.connectorSource;
-              if (sourceWrapper == null) {
+//              DeltaSourceWrapper sourceWrapper  = sourceFunction.connectorSource;
+//              if (sourceWrapper == null) {
                 stream = env.addSource(sourceFunction.source);
-              } else {
-                DataStreamSource<RowData> rowDataStream = env.fromSource(sourceWrapper.getDeltaSource(), WatermarkStrategy.noWatermarks(), sourceFunction.name);
-                stream = rowDataStream.map(new RowDataToMessageMapFunction(sourceWrapper.getIdFieldName(), sourceWrapper.getRoutingConfig(), sourceWrapper.getTableFields(), new DefaultJsonNodeGeneratorFactory()));
-              }
+//              }
+//              else {
+//                DataStreamSource<RowData> rowDataStream = env.fromSource(sourceWrapper.getDeltaSource(), WatermarkStrategy.noWatermarks(), sourceFunction.name);
+//                stream = rowDataStream.map(new RowDataToMessageMapFunction(sourceWrapper.getIdFieldName(), sourceWrapper.getRoutingConfig(), sourceWrapper.getTableFields(), new DefaultJsonNodeGeneratorFactory()));
+//              }
               stream.name(sourceFunction.name);
               stream.uid(sourceFunction.uid);
 

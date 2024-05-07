@@ -4,5 +4,5 @@ import org.apache.flink.statefun.sdk.io.IngressSpec;
 
 public interface DeltaConnectorSourceProvider {
 
-    <T> DeltaSourceWrapper forSpec(IngressSpec<T> spec);
+//    <T> DeltaSourceWrapper forSpec(IngressSpec<T> spec);
 }
