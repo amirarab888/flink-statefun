@@ -54,31 +54,6 @@ under the License.
 
     <build>
         <plugins>
-            <!-- Generate the Command messages -->
-            <plugin>
-                <groupId>com.github.os72</groupId>
-                <artifactId>protoc-jar-maven-plugin</artifactId>
-                <version>${protoc-jar-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>generate-protobuf-sources</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <includeStdTypes>true</includeStdTypes>
-                            <protocVersion>${protobuf.version}</protocVersion>
-                            <cleanOutputFolder>true</cleanOutputFolder>
-                            <inputDirectories>
-                                <inputDirectory>src/main/protobuf</inputDirectory>
-                            </inputDirectories>
-                            <outputDirectory>${basedir}/target/generated-sources/protoc-jar</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- build uber jar for launching the remote function -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

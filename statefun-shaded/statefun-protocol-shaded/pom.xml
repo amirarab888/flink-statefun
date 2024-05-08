@@ -51,60 +51,6 @@ under the License.
 
     <build>
         <plugins>
-
-            <!-- Step 1: (generate-sources) unpack protocol source proto files -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>unpack-protobuf</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>org.apache.flink</groupId>
-                                    <artifactId>statefun-sdk-protos</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>jar</type>
-                                    <outputDirectory>${proto-sources.dir}</outputDirectory>
-                                    <includes>sdk/*.proto,types/*.proto,io/*.proto</includes>
-                                </artifactItem>
-                            </artifactItems>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Step 2: (generate-sources) generate protocol java messages with protoc -->
-            <plugin>
-                <groupId>com.github.os72</groupId>
-                <artifactId>protoc-jar-maven-plugin</artifactId>
-                <version>${protoc-jar-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>generate-protobuf-sources</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <includeStdTypes>true</includeStdTypes>
-                            <protocVersion>${protobuf.version}</protocVersion>
-                            <cleanOutputFolder>true</cleanOutputFolder>
-                            <inputDirectories>
-                                <inputDirectory>src/main/protobuf</inputDirectory>
-                                <inputDirectory>${proto-sources.dir}</inputDirectory>
-                            </inputDirectories>
-                            <outputDirectory>${protocol-messages.dir}</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -121,12 +67,6 @@ under the License.
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-            <!-- Step 3: (process-sources) shade Protobuf -->
-            <plugin>
-                <groupId>com.google.code.maven-replacer-plugin</groupId>
-                <artifactId>replacer</artifactId>
             </plugin>
         </plugins>
     </build>
