@@ -21,8 +21,8 @@ package org.apache.flink.statefun.flink.core.reqreply;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import org.apache.flink.statefun.flink.core.metrics.RemoteInvocationMetrics;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
+import org.apache.flink.generated.FromFunction;
+import org.apache.flink.generated.ToFunction;
 
 /**
  * Decorator for a {@link RequestReplyClient} that makes sure we always use the correct classloader.

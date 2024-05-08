@@ -23,8 +23,8 @@ import java.util.Optional;
 import java.util.OptionalLong;
 import javax.annotation.Nullable;
 import org.apache.flink.core.memory.DataOutputView;
-import org.apache.flink.statefun.flink.core.generated.Envelope;
-import org.apache.flink.statefun.flink.core.generated.EnvelopeAddress;
+import org.apache.flink.core.generated.Envelope;
+import org.apache.flink.core.generated.EnvelopeAddress;
 import org.apache.flink.statefun.sdk.Address;
 import org.apache.flink.statefun.sdk.FunctionType;
 

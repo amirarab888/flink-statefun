@@ -18,8 +18,8 @@
 
 package org.apache.flink.statefun.e2e.common.kafka;
 
-import com.google.protobuf.Message;
-import com.google.protobuf.Parser;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Parser;
 import java.util.Map;
 import java.util.Objects;
 import org.apache.kafka.common.serialization.Deserializer;

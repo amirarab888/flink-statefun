@@ -18,14 +18,14 @@
 
 package org.apache.flink.statefun.flink.io.common;
 
-import com.google.protobuf.ByteString;
-import com.google.protobuf.Message;
-import org.apache.flink.statefun.flink.io.generated.AutoRoutable;
-import org.apache.flink.statefun.flink.io.generated.RoutingConfig;
-import org.apache.flink.statefun.flink.io.generated.TargetFunctionType;
+import org.apache.flink.com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.io.generated.AutoRoutable;
+import org.apache.flink.io.generated.RoutingConfig;
+import org.apache.flink.io.generated.TargetFunctionType;
 import org.apache.flink.statefun.sdk.FunctionType;
 import org.apache.flink.statefun.sdk.io.Router;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 
 /**
  * A {@link Router} that recognizes messages of type {@link AutoRoutable}.

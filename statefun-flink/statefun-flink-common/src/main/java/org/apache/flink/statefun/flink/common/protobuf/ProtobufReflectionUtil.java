@@ -17,12 +17,12 @@
  */
 package org.apache.flink.statefun.flink.common.protobuf;
 
-import com.google.protobuf.DescriptorProtos.FileDescriptorSet;
-import com.google.protobuf.DescriptorProtos.FileDescriptorSet.Builder;
-import com.google.protobuf.Descriptors.Descriptor;
-import com.google.protobuf.Descriptors.FileDescriptor;
-import com.google.protobuf.Message;
-import com.google.protobuf.Parser;
+import org.apache.flink.com.google.protobuf.DescriptorProtos.FileDescriptorSet;
+import org.apache.flink.com.google.protobuf.DescriptorProtos.FileDescriptorSet.Builder;
+import org.apache.flink.com.google.protobuf.Descriptors.Descriptor;
+import org.apache.flink.com.google.protobuf.Descriptors.FileDescriptor;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Parser;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;

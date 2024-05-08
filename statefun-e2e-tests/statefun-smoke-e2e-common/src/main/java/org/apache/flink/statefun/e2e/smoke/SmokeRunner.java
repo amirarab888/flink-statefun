@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Supplier;
 import org.apache.flink.statefun.e2e.common.StatefulFunctionsAppContainers;
-import org.apache.flink.statefun.e2e.smoke.generated.VerificationResult;
+import org.apache.flink.smoke.generated2.VerificationResult;
 import org.apache.flink.util.function.ThrowingRunnable;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;

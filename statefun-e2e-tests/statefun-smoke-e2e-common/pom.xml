@@ -65,6 +65,11 @@ under the License.
             <artifactId>flink-shaded-jackson</artifactId>
             <version>${flink-shaded-jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.flink</groupId>
+            <artifactId>statefun-protobuf-generated</artifactId>
+            <version>3.4-SNAPSHOT</version>
+        </dependency>
 
         <!-- logging -->
         <dependency>
@@ -78,34 +83,4 @@ under the License.
             <version>1.2.17</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <!-- Generate the Command messages -->
-            <plugin>
-                <groupId>com.github.os72</groupId>
-                <artifactId>protoc-jar-maven-plugin</artifactId>
-                <version>${protoc-jar-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>generate-protobuf-sources</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <includeStdTypes>true</includeStdTypes>
-                            <protocVersion>${protobuf.version}</protocVersion>
-                            <cleanOutputFolder>true</cleanOutputFolder>
-                            <inputDirectories>
-                                <inputDirectory>src/main/protobuf</inputDirectory>
-                            </inputDirectories>
-                            <outputDirectory>${basedir}/target/generated-sources/protoc-jar</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

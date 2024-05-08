@@ -33,7 +33,7 @@ import org.apache.flink.statefun.sdk.kinesis.auth.AwsCredentials;
 import org.apache.flink.statefun.sdk.kinesis.auth.AwsRegion;
 import org.apache.flink.statefun.sdk.kinesis.egress.KinesisEgressBuilder;
 import org.apache.flink.statefun.sdk.kinesis.egress.KinesisEgressSpec;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 
 @JsonDeserialize(builder = GenericKinesisEgressSpec.Builder.class)
 public final class GenericKinesisEgressSpec {

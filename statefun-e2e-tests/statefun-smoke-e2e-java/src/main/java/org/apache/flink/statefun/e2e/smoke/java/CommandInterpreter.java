@@ -21,9 +21,9 @@ package org.apache.flink.statefun.e2e.smoke.java;
 import static org.apache.flink.statefun.e2e.smoke.java.Constants.*;
 
 import java.time.Duration;
-import org.apache.flink.statefun.e2e.smoke.generated.Command;
-import org.apache.flink.statefun.e2e.smoke.generated.Commands;
-import org.apache.flink.statefun.e2e.smoke.generated.VerificationResult;
+import org.apache.flink.smoke.generated2.Command;
+import org.apache.flink.smoke.generated2.Commands;
+import org.apache.flink.smoke.generated2.VerificationResult;
 import org.apache.flink.statefun.sdk.java.*;
 import org.apache.flink.statefun.sdk.java.message.EgressMessage;
 import org.apache.flink.statefun.sdk.java.message.EgressMessageBuilder;

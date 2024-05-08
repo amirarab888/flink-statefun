@@ -36,7 +36,7 @@ import org.apache.flink.shaded.netty4.io.netty.handler.codec.http.HttpVersion;
 import org.apache.flink.shaded.netty4.io.netty.util.ReferenceCountUtil;
 import org.apache.flink.statefun.flink.core.nettyclient.exceptions.DisconnectedException;
 import org.apache.flink.statefun.flink.core.nettyclient.exceptions.WrongHttpResponse;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
+import org.apache.flink.generated.FromFunction;
 
 public final class NettyRequestReplyHandler extends ChannelDuplexHandler {
 

@@ -17,7 +17,7 @@
  */
 package org.apache.flink.statefun.flink.common.protobuf;
 
-import com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 import java.util.Objects;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.TypeInformation;

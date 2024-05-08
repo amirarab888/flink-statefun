@@ -30,7 +30,7 @@ import org.apache.flink.statefun.sdk.java.TypeName;
 import org.apache.flink.statefun.sdk.java.message.EgressMessage;
 import org.apache.flink.statefun.sdk.java.message.Message;
 import org.apache.flink.statefun.sdk.java.storage.ConcurrentAddressScopedStorage;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
+import org.apache.flink.generated.FromFunction;
 
 /**
  * A thread safe implementation of a {@linkplain Context}.

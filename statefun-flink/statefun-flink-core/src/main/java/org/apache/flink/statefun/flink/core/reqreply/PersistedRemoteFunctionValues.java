@@ -18,7 +18,7 @@
 
 package org.apache.flink.statefun.flink.core.reqreply;
 
-import com.google.protobuf.MoreByteStrings;
+import org.apache.flink.com.google.protobuf.MoreByteStrings;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
@@ -26,12 +26,12 @@ import java.util.Map;
 import org.apache.flink.statefun.flink.core.types.remote.RemoteValueTypeMismatchException;
 import org.apache.flink.statefun.sdk.TypeName;
 import org.apache.flink.statefun.sdk.annotations.Persisted;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.ExpirationSpec;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.PersistedValueMutation;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.PersistedValueSpec;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction.InvocationBatchRequest;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.FromFunction.ExpirationSpec;
+import org.apache.flink.generated.FromFunction.PersistedValueMutation;
+import org.apache.flink.generated.FromFunction.PersistedValueSpec;
+import org.apache.flink.generated.ToFunction;
+import org.apache.flink.generated.ToFunction.InvocationBatchRequest;
+import org.apache.flink.generated.TypedValue;
 import org.apache.flink.statefun.sdk.state.Expiration;
 import org.apache.flink.statefun.sdk.state.PersistedStateRegistry;
 import org.apache.flink.statefun.sdk.state.RemotePersistedValue;

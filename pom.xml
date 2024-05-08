@@ -70,6 +70,7 @@ under the License.
         <module>statefun-e2e-tests</module>
         <module>statefun-delta-io</module>
         <module>statefun-embedded-module</module>
+        <module>statefun-protobuf-generated</module>
     </modules>
 
     <properties>
@@ -99,6 +100,12 @@ under the License.
             <groupId>com.google.auto.service</groupId>
             <artifactId>auto-service-annotations</artifactId>
             <version>${auto-service.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

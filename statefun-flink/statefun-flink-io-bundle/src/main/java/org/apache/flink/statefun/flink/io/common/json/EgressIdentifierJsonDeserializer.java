@@ -24,7 +24,7 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.Deseriali
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonDeserializer;
 import org.apache.flink.statefun.sdk.TypeName;
 import org.apache.flink.statefun.sdk.io.EgressIdentifier;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 
 public final class EgressIdentifierJsonDeserializer
     extends JsonDeserializer<EgressIdentifier<TypedValue>> {

@@ -25,7 +25,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import org.apache.flink.statefun.flink.core.generated.EnvelopeAddress;
+import org.apache.flink.core.generated.EnvelopeAddress;
 import org.apache.flink.statefun.flink.core.message.Message;
 import org.apache.flink.statefun.flink.core.metrics.FunctionTypeMetrics;
 import org.apache.flink.statefun.sdk.Address;

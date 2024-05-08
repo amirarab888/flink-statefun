@@ -17,9 +17,9 @@
  */
 package org.apache.flink.statefun.e2e.smoke.testutils;
 
-import org.apache.flink.statefun.e2e.smoke.generated.Command;
-import org.apache.flink.statefun.e2e.smoke.generated.Commands;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceCommand;
+import org.apache.flink.smoke.generated2.Command;
+import org.apache.flink.smoke.generated2.Commands;
+import org.apache.flink.smoke.generated2.SourceCommand;
 
 public class Utils {
 

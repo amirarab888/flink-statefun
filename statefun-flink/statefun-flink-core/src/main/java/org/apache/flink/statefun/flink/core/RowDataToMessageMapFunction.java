@@ -1,14 +1,14 @@
 package org.apache.flink.statefun.flink.core;
 
-import com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 import org.apache.flink.TableFieldConfig;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.JsonNode;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.statefun.flink.core.jsonnodegenerator.JsonNodeGeneratorFactory;
-import org.apache.flink.statefun.flink.io.generated.AutoRoutable;
-import org.apache.flink.statefun.flink.io.generated.RoutingConfig;
+import org.apache.flink.io.generated.AutoRoutable;
+import org.apache.flink.io.generated.RoutingConfig;
 import org.apache.flink.table.data.RowData;
 
 import java.util.List;

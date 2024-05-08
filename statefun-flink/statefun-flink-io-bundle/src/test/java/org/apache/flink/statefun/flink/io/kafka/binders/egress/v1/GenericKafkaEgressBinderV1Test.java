@@ -29,7 +29,7 @@ import org.apache.flink.statefun.extensions.ComponentJsonObject;
 import org.apache.flink.statefun.flink.io.testutils.TestModuleBinder;
 import org.apache.flink.statefun.sdk.io.EgressIdentifier;
 import org.apache.flink.statefun.sdk.kafka.KafkaEgressSpec;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 import org.junit.Test;
 
 public class GenericKafkaEgressBinderV1Test {

@@ -18,12 +18,12 @@
 
 package org.apache.flink.statefun.flink.core.common;
 
-import com.google.protobuf.Message;
-import com.google.protobuf.Parser;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Parser;
 import java.io.IOException;
 import java.io.InputStream;
 import org.apache.flink.statefun.sdk.FunctionType;
-import org.apache.flink.statefun.sdk.reqreply.generated.Address;
+import org.apache.flink.generated.Address;
 
 public final class PolyglotUtil {
   private PolyglotUtil() {}

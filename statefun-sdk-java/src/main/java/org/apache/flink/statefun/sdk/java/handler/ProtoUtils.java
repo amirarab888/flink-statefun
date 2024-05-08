@@ -17,8 +17,8 @@
  */
 package org.apache.flink.statefun.sdk.java.handler;
 
-import static org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.ExpirationSpec.ExpireMode;
-import static org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.ExpirationSpec.newBuilder;
+import static org.apache.flink.generated.FromFunction.ExpirationSpec.ExpireMode;
+import static org.apache.flink.generated.FromFunction.ExpirationSpec.newBuilder;
 
 import org.apache.flink.statefun.sdk.java.ApiExtension;
 import org.apache.flink.statefun.sdk.java.Expiration;
@@ -29,9 +29,9 @@ import org.apache.flink.statefun.sdk.java.message.EgressMessageWrapper;
 import org.apache.flink.statefun.sdk.java.message.Message;
 import org.apache.flink.statefun.sdk.java.message.MessageWrapper;
 import org.apache.flink.statefun.sdk.java.slice.SliceProtobufUtil;
-import org.apache.flink.statefun.sdk.reqreply.generated.Address;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.PersistedValueSpec;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.Address;
+import org.apache.flink.generated.FromFunction.PersistedValueSpec;
+import org.apache.flink.generated.TypedValue;
 
 final class ProtoUtils {
   private ProtoUtils() {}

@@ -22,7 +22,7 @@ import java.time.Duration;
 import java.util.Objects;
 import org.apache.flink.statefun.sdk.java.types.Type;
 import org.apache.flink.statefun.sdk.java.types.Types;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 
 /**
  * A {@link ValueSpec} identifies a registered persistent value of a function, which will be managed

@@ -25,11 +25,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import org.apache.flink.statefun.sdk.java.TypeName;
 import org.apache.flink.statefun.sdk.java.slice.Slice;
 import org.apache.flink.statefun.sdk.java.slice.Slices;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.InvalidProtocolBufferException;
-import org.apache.flink.statefun.sdk.types.generated.BooleanWrapper;
-import org.apache.flink.statefun.sdk.types.generated.IntWrapper;
-import org.apache.flink.statefun.sdk.types.generated.LongWrapper;
-import org.apache.flink.statefun.sdk.types.generated.StringWrapper;
+import org.apache.flink.com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.flink.types.generated.BooleanWrapper;
+import org.apache.flink.types.generated.IntWrapper;
+import org.apache.flink.types.generated.LongWrapper;
+import org.apache.flink.types.generated.StringWrapper;
 import org.junit.Ignore;
 import org.junit.Test;
 

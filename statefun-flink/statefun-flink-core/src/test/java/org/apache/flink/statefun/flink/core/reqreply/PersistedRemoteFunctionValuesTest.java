@@ -23,15 +23,15 @@ import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
-import com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 import java.util.Arrays;
 import java.util.Collections;
 import org.apache.flink.statefun.sdk.TypeName;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.PersistedValueMutation;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction.PersistedValueSpec;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction.InvocationBatchRequest;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction.PersistedValue;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.FromFunction.PersistedValueMutation;
+import org.apache.flink.generated.FromFunction.PersistedValueSpec;
+import org.apache.flink.generated.ToFunction.InvocationBatchRequest;
+import org.apache.flink.generated.ToFunction.PersistedValue;
+import org.apache.flink.generated.TypedValue;
 import org.junit.Test;
 
 public class PersistedRemoteFunctionValuesTest {

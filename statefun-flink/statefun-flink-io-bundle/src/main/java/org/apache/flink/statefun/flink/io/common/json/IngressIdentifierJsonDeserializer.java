@@ -18,7 +18,7 @@
 
 package org.apache.flink.statefun.flink.io.common.json;
 
-import com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 import java.io.IOException;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.core.JsonParser;
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.DeserializationContext;

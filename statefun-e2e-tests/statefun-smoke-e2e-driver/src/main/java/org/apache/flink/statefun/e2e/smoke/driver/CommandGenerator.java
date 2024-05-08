@@ -29,9 +29,9 @@ import org.apache.commons.math3.distribution.EnumeratedDistribution;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.apache.commons.math3.util.Pair;
 import org.apache.flink.statefun.e2e.smoke.SmokeRunnerParameters;
-import org.apache.flink.statefun.e2e.smoke.generated.Command;
-import org.apache.flink.statefun.e2e.smoke.generated.Commands;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceCommand;
+import org.apache.flink.smoke.generated2.Command;
+import org.apache.flink.smoke.generated2.Commands;
+import org.apache.flink.smoke.generated2.SourceCommand;
 
 /**
  * Generates random commands to be interpreted by functions of type {@link Constants#FN_TYPE}.

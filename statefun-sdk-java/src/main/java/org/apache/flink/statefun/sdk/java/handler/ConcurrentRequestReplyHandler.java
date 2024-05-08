@@ -36,10 +36,10 @@ import org.apache.flink.statefun.sdk.java.slice.Slice;
 import org.apache.flink.statefun.sdk.java.slice.SliceProtobufUtil;
 import org.apache.flink.statefun.sdk.java.storage.ConcurrentAddressScopedStorage;
 import org.apache.flink.statefun.sdk.java.storage.StateValueContexts;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
+import org.apache.flink.generated.FromFunction;
+import org.apache.flink.generated.ToFunction;
+import org.apache.flink.generated.TypedValue;
+import org.apache.flink.com.google.protobuf.ByteString;
 
 /**
  * A threadsafe {@linkplain RequestReplyHandler}. This handler lifecycle is bound to the entire

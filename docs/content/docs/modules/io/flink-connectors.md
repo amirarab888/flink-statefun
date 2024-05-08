@@ -50,7 +50,7 @@ import org.apache.flink.statefun.flink.io.datastream.SourceFunctionSpec;
 import org.apache.flink.statefun.sdk.io.IngressIdentifier;
 import org.apache.flink.statefun.sdk.io.IngressSpec;
 import org.apache.flink.statefun.sdk.spi.StatefulFunctionModule;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 
 public class ModuleWithSourceSpec implements StatefulFunctionModule {
 

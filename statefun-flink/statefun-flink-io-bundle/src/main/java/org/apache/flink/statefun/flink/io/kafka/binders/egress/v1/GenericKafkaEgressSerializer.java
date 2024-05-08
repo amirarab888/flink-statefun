@@ -17,12 +17,12 @@
  */
 package org.apache.flink.statefun.flink.io.kafka.binders.egress.v1;
 
-import com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.flink.com.google.protobuf.InvalidProtocolBufferException;
 import java.nio.charset.StandardCharsets;
 import org.apache.flink.statefun.flink.common.types.TypedValueUtil;
-import org.apache.flink.statefun.sdk.egress.generated.KafkaProducerRecord;
+import org.apache.flink.egress.generated.KafkaProducerRecord;
 import org.apache.flink.statefun.sdk.kafka.KafkaEgressSerializer;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 /**

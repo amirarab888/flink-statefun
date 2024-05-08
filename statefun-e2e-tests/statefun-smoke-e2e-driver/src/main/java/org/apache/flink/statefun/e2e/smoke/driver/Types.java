@@ -18,11 +18,11 @@
 
 package org.apache.flink.statefun.e2e.smoke.driver;
 
-import org.apache.flink.statefun.e2e.smoke.generated.Commands;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceCommand;
-import org.apache.flink.statefun.e2e.smoke.generated.VerificationResult;
+import org.apache.flink.smoke.generated2.Commands;
+import org.apache.flink.smoke.generated2.SourceCommand;
+import org.apache.flink.smoke.generated2.VerificationResult;
 import org.apache.flink.statefun.sdk.TypeName;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 
 public final class Types {
   private Types() {}

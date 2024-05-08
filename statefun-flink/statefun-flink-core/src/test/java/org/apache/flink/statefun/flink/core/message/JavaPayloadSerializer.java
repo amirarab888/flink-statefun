@@ -17,10 +17,10 @@
  */
 package org.apache.flink.statefun.flink.core.message;
 
-import com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 import java.io.*;
 import javax.annotation.Nonnull;
-import org.apache.flink.statefun.flink.core.generated.Payload;
+import org.apache.flink.core.generated.Payload;
 
 // this is a payload serializer that uses normal java serialization, used for testing custom payload
 // serialization

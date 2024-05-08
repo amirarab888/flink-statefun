@@ -17,12 +17,12 @@
  */
 package org.apache.flink.statefun.flink.io.kafka.binders.ingress.v1;
 
-import com.google.protobuf.Message;
-import com.google.protobuf.MoreByteStrings;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.MoreByteStrings;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
-import org.apache.flink.statefun.flink.io.generated.AutoRoutable;
-import org.apache.flink.statefun.flink.io.generated.RoutingConfig;
+import org.apache.flink.io.generated.AutoRoutable;
+import org.apache.flink.io.generated.RoutingConfig;
 import org.apache.flink.statefun.sdk.TypeName;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 

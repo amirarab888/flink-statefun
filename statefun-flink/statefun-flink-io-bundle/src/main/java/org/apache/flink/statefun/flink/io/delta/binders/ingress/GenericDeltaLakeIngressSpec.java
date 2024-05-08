@@ -1,6 +1,6 @@
 package org.apache.flink.statefun.flink.io.delta.binders.ingress;
 
-import com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 import org.apache.flink.DeltaLakeIngressBuilder;
 import org.apache.flink.DeltaLakeIngressSpec;
 import org.apache.flink.TableFieldConfig;

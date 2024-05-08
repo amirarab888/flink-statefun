@@ -38,7 +38,7 @@ import org.apache.flink.statefun.sdk.io.EgressIdentifier;
 import org.apache.flink.statefun.sdk.kafka.KafkaEgressBuilder;
 import org.apache.flink.statefun.sdk.kafka.KafkaEgressSpec;
 import org.apache.flink.statefun.sdk.kafka.KafkaProducerSemantic;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 import org.apache.flink.util.TimeUtils;
 
 @JsonDeserialize(builder = GenericKafkaEgressSpec.Builder.class)

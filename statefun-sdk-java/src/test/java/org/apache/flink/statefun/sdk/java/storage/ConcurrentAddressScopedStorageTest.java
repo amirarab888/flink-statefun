@@ -29,9 +29,9 @@ import java.util.Optional;
 import org.apache.flink.statefun.sdk.java.AddressScopedStorage;
 import org.apache.flink.statefun.sdk.java.ValueSpec;
 import org.apache.flink.statefun.sdk.java.types.Type;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
+import org.apache.flink.generated.ToFunction;
+import org.apache.flink.generated.TypedValue;
+import org.apache.flink.com.google.protobuf.ByteString;
 import org.junit.Test;
 
 public class ConcurrentAddressScopedStorageTest {

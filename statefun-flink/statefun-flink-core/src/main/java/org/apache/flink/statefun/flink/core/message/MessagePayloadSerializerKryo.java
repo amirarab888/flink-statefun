@@ -17,14 +17,14 @@
  */
 package org.apache.flink.statefun.flink.core.message;
 
-import com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 import java.io.IOException;
 import javax.annotation.Nonnull;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.java.typeutils.runtime.kryo.KryoSerializer;
 import org.apache.flink.core.memory.DataInputDeserializer;
 import org.apache.flink.core.memory.DataOutputSerializer;
-import org.apache.flink.statefun.flink.core.generated.Payload;
+import org.apache.flink.core.generated.Payload;
 
 public final class MessagePayloadSerializerKryo implements MessagePayloadSerializer {
 

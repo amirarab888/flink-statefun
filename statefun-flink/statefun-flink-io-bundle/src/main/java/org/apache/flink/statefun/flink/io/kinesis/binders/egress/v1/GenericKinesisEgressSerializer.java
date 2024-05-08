@@ -18,12 +18,12 @@
 
 package org.apache.flink.statefun.flink.io.kinesis.binders.egress.v1;
 
-import com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.flink.com.google.protobuf.InvalidProtocolBufferException;
 import org.apache.flink.statefun.flink.common.types.TypedValueUtil;
-import org.apache.flink.statefun.sdk.egress.generated.KinesisEgressRecord;
+import org.apache.flink.egress.generated.KinesisEgressRecord;
 import org.apache.flink.statefun.sdk.kinesis.egress.EgressRecord;
 import org.apache.flink.statefun.sdk.kinesis.egress.KinesisEgressSerializer;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 
 public final class GenericKinesisEgressSerializer implements KinesisEgressSerializer<TypedValue> {
 

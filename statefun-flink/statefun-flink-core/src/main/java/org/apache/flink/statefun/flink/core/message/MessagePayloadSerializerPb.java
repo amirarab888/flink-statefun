@@ -17,16 +17,16 @@
  */
 package org.apache.flink.statefun.flink.core.message;
 
-import com.google.protobuf.ByteString;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
-import com.google.protobuf.Parser;
+import org.apache.flink.com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Parser;
 import it.unimi.dsi.fastutil.objects.ObjectOpenHashMap;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 import org.apache.flink.statefun.flink.common.protobuf.ProtobufReflectionUtil;
-import org.apache.flink.statefun.flink.core.generated.Payload;
+import org.apache.flink.core.generated.Payload;
 
 @NotThreadSafe
 public class MessagePayloadSerializerPb implements MessagePayloadSerializer {

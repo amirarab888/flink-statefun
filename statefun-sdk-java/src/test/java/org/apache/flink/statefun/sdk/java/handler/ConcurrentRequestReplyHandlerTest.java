@@ -34,8 +34,8 @@ import org.apache.flink.statefun.sdk.java.ValueSpec;
 import org.apache.flink.statefun.sdk.java.handler.TestUtils.RequestBuilder;
 import org.apache.flink.statefun.sdk.java.message.Message;
 import org.apache.flink.statefun.sdk.java.types.Types;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
+import org.apache.flink.generated.FromFunction;
+import org.apache.flink.generated.ToFunction;
 import org.junit.Test;
 
 public class ConcurrentRequestReplyHandlerTest {

@@ -17,7 +17,7 @@
  */
 package org.apache.flink.statefun.flink.core.types;
 
-import com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

@@ -17,18 +17,18 @@
  */
 package org.apache.flink.statefun.flink.common.protobuf;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.CodedOutputStream;
-import com.google.protobuf.DescriptorProtos.FileDescriptorSet;
-import com.google.protobuf.Descriptors.Descriptor;
-import com.google.protobuf.Message;
-import com.google.protobuf.Parser;
+import org.apache.flink.com.google.protobuf.CodedInputStream;
+import org.apache.flink.com.google.protobuf.CodedOutputStream;
+import org.apache.flink.com.google.protobuf.DescriptorProtos.FileDescriptorSet;
+import org.apache.flink.com.google.protobuf.Descriptors.Descriptor;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Parser;
 import java.io.IOException;
 import java.util.Objects;
 import javax.annotation.concurrent.NotThreadSafe;
 import org.apache.flink.core.memory.DataInputView;
 import org.apache.flink.core.memory.DataOutputView;
-import org.apache.flink.statefun.flink.common.generated.ProtobufSerializerSnapshot;
+import org.apache.flink.common.generated.ProtobufSerializerSnapshot;
 
 @NotThreadSafe
 public final class ProtobufSerializer<M extends Message> {

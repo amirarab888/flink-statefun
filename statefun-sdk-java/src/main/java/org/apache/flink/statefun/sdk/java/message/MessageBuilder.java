@@ -26,8 +26,8 @@ import org.apache.flink.statefun.sdk.java.slice.SliceProtobufUtil;
 import org.apache.flink.statefun.sdk.java.types.Type;
 import org.apache.flink.statefun.sdk.java.types.TypeSerializer;
 import org.apache.flink.statefun.sdk.java.types.Types;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
+import org.apache.flink.generated.TypedValue;
+import org.apache.flink.com.google.protobuf.ByteString;
 
 public final class MessageBuilder {
   private final TypedValue.Builder builder;

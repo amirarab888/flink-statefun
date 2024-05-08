@@ -1,6 +1,6 @@
 package org.apache.flink;
 
-import com.google.protobuf.StringValue;
+import org.apache.flink.com.google.protobuf.StringValue;
 import org.apache.flink.statefun.sdk.kafka.KafkaIngressDeserializer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 

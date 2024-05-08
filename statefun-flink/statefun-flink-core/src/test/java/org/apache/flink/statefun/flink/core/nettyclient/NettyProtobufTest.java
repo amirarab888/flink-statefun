@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.IntFunction;
 import org.apache.flink.shaded.netty4.io.netty.buffer.ByteBuf;
 import org.apache.flink.shaded.netty4.io.netty.buffer.ByteBufAllocator;
-import org.apache.flink.statefun.sdk.reqreply.generated.Address;
+import org.apache.flink.generated.Address;
 import org.junit.After;
 import org.junit.Test;
 

@@ -41,8 +41,8 @@ import org.apache.flink.statefun.flink.core.nettyclient.exceptions.ShutdownExcep
 import org.apache.flink.statefun.flink.core.reqreply.ToFunctionRequestSummary;
 import org.apache.flink.statefun.sdk.Address;
 import org.apache.flink.statefun.sdk.FunctionType;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
+import org.apache.flink.generated.FromFunction;
+import org.apache.flink.generated.ToFunction;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -30,15 +30,15 @@ import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import org.apache.flink.statefun.e2e.smoke.driver.Constants;
 import org.apache.flink.statefun.e2e.smoke.driver.Ids;
-import org.apache.flink.statefun.e2e.smoke.generated.Command;
-import org.apache.flink.statefun.e2e.smoke.generated.Commands;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceCommand;
-import org.apache.flink.statefun.e2e.smoke.generated.VerificationResult;
+import org.apache.flink.smoke.generated2.Command;
+import org.apache.flink.smoke.generated2.Commands;
+import org.apache.flink.smoke.generated2.SourceCommand;
+import org.apache.flink.smoke.generated2.VerificationResult;
 import org.apache.flink.statefun.sdk.Address;
 import org.apache.flink.statefun.sdk.AsyncOperationResult;
 import org.apache.flink.statefun.sdk.Context;
 import org.apache.flink.statefun.sdk.FunctionType;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 import org.apache.flink.statefun.sdk.state.PersistedValue;
 
 public final class CommandInterpreter {

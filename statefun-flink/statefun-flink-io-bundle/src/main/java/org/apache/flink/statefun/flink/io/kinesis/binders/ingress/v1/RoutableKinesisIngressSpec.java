@@ -18,7 +18,7 @@
 
 package org.apache.flink.statefun.flink.io.kinesis.binders.ingress.v1;
 
-import com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,8 +42,8 @@ import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.annotatio
 import org.apache.flink.shaded.jackson2.com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.statefun.flink.io.common.json.IngressIdentifierJsonDeserializer;
 import org.apache.flink.statefun.flink.io.common.json.PropertiesJsonDeserializer;
-import org.apache.flink.statefun.flink.io.generated.RoutingConfig;
-import org.apache.flink.statefun.flink.io.generated.TargetFunctionType;
+import org.apache.flink.io.generated.RoutingConfig;
+import org.apache.flink.io.generated.TargetFunctionType;
 import org.apache.flink.statefun.flink.io.kinesis.binders.AwsCredentialsJsonDeserializer;
 import org.apache.flink.statefun.flink.io.kinesis.binders.AwsRegionJsonDeserializer;
 import org.apache.flink.statefun.sdk.TypeName;

@@ -41,8 +41,8 @@ import org.apache.flink.statefun.flink.core.metrics.RemoteInvocationMetrics;
 import org.apache.flink.statefun.flink.core.reqreply.ToFunctionRequestSummary;
 import org.apache.flink.statefun.sdk.Address;
 import org.apache.flink.statefun.sdk.FunctionType;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
+import org.apache.flink.generated.FromFunction;
+import org.apache.flink.generated.ToFunction;
 
 public abstract class TransportClientTest {
   protected static final String A_CA_CERTS_LOCATION = "certs/a_caCerts.pem";

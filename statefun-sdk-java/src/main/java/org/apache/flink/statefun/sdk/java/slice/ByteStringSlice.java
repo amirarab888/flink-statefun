@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.Objects;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 
 final class ByteStringSlice implements Slice {
   private final ByteString byteString;

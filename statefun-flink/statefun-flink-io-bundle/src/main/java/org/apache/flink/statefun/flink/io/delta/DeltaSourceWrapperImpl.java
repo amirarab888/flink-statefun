@@ -2,8 +2,8 @@ package org.apache.flink.statefun.flink.io.delta;
 
 import io.delta.flink.source.DeltaSource;
 import org.apache.flink.TableFieldConfig;
-import org.apache.flink.statefun.flink.io.generated.RoutingConfig;
-import org.apache.flink.statefun.flink.io.generated.TargetFunctionType;
+import org.apache.flink.io.generated.RoutingConfig;
+import org.apache.flink.io.generated.TargetFunctionType;
 import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
 import org.apache.flink.table.data.RowData;
 

@@ -17,7 +17,7 @@
  */
 package org.apache.flink.statefun.flink.common.protobuf;
 
-import com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 import java.io.IOException;
 import java.util.Objects;
 import javax.annotation.Nullable;
@@ -26,7 +26,7 @@ import org.apache.flink.api.common.typeutils.TypeSerializerSchemaCompatibility;
 import org.apache.flink.api.common.typeutils.TypeSerializerSnapshot;
 import org.apache.flink.core.memory.DataInputView;
 import org.apache.flink.core.memory.DataOutputView;
-import org.apache.flink.statefun.flink.common.generated.ProtobufSerializerSnapshot;
+import org.apache.flink.common.generated.ProtobufSerializerSnapshot;
 
 public final class ProtobufTypeSerializerSnapshot<M extends Message>
     implements TypeSerializerSnapshot<M> {

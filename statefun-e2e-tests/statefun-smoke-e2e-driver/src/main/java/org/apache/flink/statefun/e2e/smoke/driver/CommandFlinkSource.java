@@ -18,8 +18,8 @@
 package org.apache.flink.statefun.e2e.smoke.driver;
 
 import static org.apache.flink.statefun.e2e.smoke.driver.Types.packSourceCommand;
-import static org.apache.flink.statefun.e2e.smoke.generated.Command.Verify;
-import static org.apache.flink.statefun.e2e.smoke.generated.Command.newBuilder;
+import static org.apache.flink.smoke.generated2.Command.Verify;
+import static org.apache.flink.smoke.generated2.Command.newBuilder;
 
 import java.util.Iterator;
 import java.util.Objects;
@@ -36,11 +36,11 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.runtime.state.FunctionInitializationContext;
 import org.apache.flink.runtime.state.FunctionSnapshotContext;
 import org.apache.flink.statefun.e2e.smoke.SmokeRunnerParameters;
-import org.apache.flink.statefun.e2e.smoke.generated.Command;
-import org.apache.flink.statefun.e2e.smoke.generated.Commands;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceCommand;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceSnapshot;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.smoke.generated2.Command;
+import org.apache.flink.smoke.generated2.Commands;
+import org.apache.flink.smoke.generated2.SourceCommand;
+import org.apache.flink.smoke.generated2.SourceSnapshot;
+import org.apache.flink.generated.TypedValue;
 import org.apache.flink.streaming.api.checkpoint.CheckpointedFunction;
 import org.apache.flink.streaming.api.functions.source.RichSourceFunction;
 import org.slf4j.Logger;

@@ -23,9 +23,9 @@ import java.util.Objects;
 import org.apache.flink.core.memory.DataInputView;
 import org.apache.flink.core.memory.DataOutputView;
 import org.apache.flink.statefun.flink.common.protobuf.ProtobufSerializer;
-import org.apache.flink.statefun.flink.core.generated.Checkpoint;
-import org.apache.flink.statefun.flink.core.generated.Envelope;
-import org.apache.flink.statefun.flink.core.generated.Payload;
+import org.apache.flink.core.generated.Checkpoint;
+import org.apache.flink.core.generated.Envelope;
+import org.apache.flink.core.generated.Payload;
 import org.apache.flink.statefun.sdk.Address;
 
 public final class MessageFactory {

@@ -17,7 +17,7 @@
  */
 package org.apache.flink.statefun.flink.common.protobuf;
 
-import com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Objects;

@@ -18,11 +18,11 @@
 
 package org.apache.flink.statefun.flink.common.types;
 
-import com.google.protobuf.Descriptors;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
-import com.google.protobuf.Parser;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.com.google.protobuf.Descriptors;
+import org.apache.flink.com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Parser;
+import org.apache.flink.generated.TypedValue;
 
 public final class TypedValueUtil {
 

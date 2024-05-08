@@ -20,7 +20,7 @@ package org.apache.flink.statefun.flink.core;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-import org.apache.flink.statefun.flink.core.generated.EnvelopeAddress;
+import org.apache.flink.core.generated.EnvelopeAddress;
 import org.apache.flink.statefun.flink.core.message.MessageFactory;
 import org.apache.flink.statefun.flink.core.message.MessageFactoryKey;
 import org.apache.flink.statefun.flink.core.message.MessageFactoryType;

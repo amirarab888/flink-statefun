@@ -18,7 +18,7 @@
 package org.apache.flink.statefun.flink.core.message;
 
 import javax.annotation.Nonnull;
-import org.apache.flink.statefun.flink.core.generated.Payload;
+import org.apache.flink.core.generated.Payload;
 
 public interface MessagePayloadSerializer {
 

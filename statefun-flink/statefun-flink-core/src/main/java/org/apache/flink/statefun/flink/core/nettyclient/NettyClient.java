@@ -48,8 +48,8 @@ import org.apache.flink.statefun.flink.common.ResourceLocator;
 import org.apache.flink.statefun.flink.core.metrics.RemoteInvocationMetrics;
 import org.apache.flink.statefun.flink.core.reqreply.RequestReplyClient;
 import org.apache.flink.statefun.flink.core.reqreply.ToFunctionRequestSummary;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
+import org.apache.flink.generated.FromFunction;
+import org.apache.flink.generated.ToFunction;
 import org.apache.flink.util.Preconditions;
 
 final class NettyClient implements RequestReplyClient, NettyClientService {

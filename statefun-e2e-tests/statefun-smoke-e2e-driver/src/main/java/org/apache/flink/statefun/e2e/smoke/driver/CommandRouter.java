@@ -20,10 +20,10 @@ package org.apache.flink.statefun.e2e.smoke.driver;
 import static org.apache.flink.statefun.e2e.smoke.driver.Types.unpackSourceCommand;
 
 import java.util.Objects;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceCommand;
+import org.apache.flink.smoke.generated2.SourceCommand;
 import org.apache.flink.statefun.sdk.FunctionType;
 import org.apache.flink.statefun.sdk.io.Router;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.TypedValue;
 
 public class CommandRouter implements Router<TypedValue> {
   private final Ids ids;

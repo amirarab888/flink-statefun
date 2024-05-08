@@ -17,11 +17,11 @@
  */
 package org.apache.flink.statefun.flink.io.kinesis.binders.ingress.v1;
 
-import com.google.protobuf.Message;
-import com.google.protobuf.MoreByteStrings;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.MoreByteStrings;
 import java.util.Map;
-import org.apache.flink.statefun.flink.io.generated.AutoRoutable;
-import org.apache.flink.statefun.flink.io.generated.RoutingConfig;
+import org.apache.flink.io.generated.AutoRoutable;
+import org.apache.flink.io.generated.RoutingConfig;
 import org.apache.flink.statefun.sdk.TypeName;
 import org.apache.flink.statefun.sdk.kinesis.ingress.IngressRecord;
 import org.apache.flink.statefun.sdk.kinesis.ingress.KinesisIngressDeserializer;

@@ -22,10 +22,10 @@ import org.apache.flink.statefun.sdk.java.ValueSpec;
 import org.apache.flink.statefun.sdk.java.slice.Slice;
 import org.apache.flink.statefun.sdk.java.slice.SliceProtobufUtil;
 import org.apache.flink.statefun.sdk.java.types.Type;
-import org.apache.flink.statefun.sdk.reqreply.generated.Address;
-import org.apache.flink.statefun.sdk.reqreply.generated.FromFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.ToFunction;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
+import org.apache.flink.generated.Address;
+import org.apache.flink.generated.FromFunction;
+import org.apache.flink.generated.ToFunction;
+import org.apache.flink.generated.TypedValue;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 

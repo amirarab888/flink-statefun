@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.Set;
 import org.apache.flink.statefun.sdk.java.TypeName;
 import org.apache.flink.statefun.sdk.java.ValueSpec;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Message;
 
 /**
  * This class is the core abstraction used by Stateful Functions's type system, and consists of a

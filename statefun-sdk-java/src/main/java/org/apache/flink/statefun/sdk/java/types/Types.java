@@ -27,16 +27,16 @@ import org.apache.flink.statefun.sdk.java.TypeName;
 import org.apache.flink.statefun.sdk.java.slice.Slice;
 import org.apache.flink.statefun.sdk.java.slice.SliceProtobufUtil;
 import org.apache.flink.statefun.sdk.java.slice.Slices;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.InvalidProtocolBufferException;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.MoreByteStrings;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.WireFormat;
-import org.apache.flink.statefun.sdk.types.generated.BooleanWrapper;
-import org.apache.flink.statefun.sdk.types.generated.DoubleWrapper;
-import org.apache.flink.statefun.sdk.types.generated.FloatWrapper;
-import org.apache.flink.statefun.sdk.types.generated.IntWrapper;
-import org.apache.flink.statefun.sdk.types.generated.LongWrapper;
-import org.apache.flink.statefun.sdk.types.generated.StringWrapper;
+import org.apache.flink.com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.flink.com.google.protobuf.MoreByteStrings;
+import org.apache.flink.com.google.protobuf.WireFormat;
+import org.apache.flink.types.generated.BooleanWrapper;
+import org.apache.flink.types.generated.DoubleWrapper;
+import org.apache.flink.types.generated.FloatWrapper;
+import org.apache.flink.types.generated.IntWrapper;
+import org.apache.flink.types.generated.LongWrapper;
+import org.apache.flink.types.generated.StringWrapper;
 
 public final class Types {
   private Types() {}

@@ -23,7 +23,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.apache.flink.statefun.e2e.smoke.SmokeRunnerParameters;
-import org.apache.flink.statefun.e2e.smoke.generated.SourceCommand;
+import org.apache.flink.smoke.generated2.SourceCommand;
 import org.junit.Test;
 
 public class CommandGeneratorTest {

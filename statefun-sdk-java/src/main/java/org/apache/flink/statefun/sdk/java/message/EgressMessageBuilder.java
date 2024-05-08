@@ -25,15 +25,15 @@ import org.apache.flink.statefun.sdk.java.slice.SliceProtobufUtil;
 import org.apache.flink.statefun.sdk.java.types.Type;
 import org.apache.flink.statefun.sdk.java.types.TypeSerializer;
 import org.apache.flink.statefun.sdk.java.types.Types;
-import org.apache.flink.statefun.sdk.reqreply.generated.TypedValue;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
+import org.apache.flink.generated.TypedValue;
+import org.apache.flink.com.google.protobuf.ByteString;
 
 /**
  * A Custom {@link EgressMessage} builder.
  *
  * <p>To use {code Kafka} specific builder please use {@link
  * org.apache.flink.statefun.sdk.java.io.KafkaEgressMessage}. To use {code Kinesis} specific egress
- * please use {@link org.apache.flink.statefun.sdk.egress.generated.KinesisEgress}.
+ * please use {@link org.apache.flink.egress.generated.KinesisEgress}.
  *
  * <p>Use this builder if you need to send message to a custom egress defined via the embedded SDK.
  */

@@ -17,11 +17,11 @@
  */
 package org.apache.flink.statefun.flink.core.nettyclient;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.CodedOutputStream;
-import com.google.protobuf.InvalidProtocolBufferException;
-import com.google.protobuf.Message;
-import com.google.protobuf.Parser;
+import org.apache.flink.com.google.protobuf.CodedInputStream;
+import org.apache.flink.com.google.protobuf.CodedOutputStream;
+import org.apache.flink.com.google.protobuf.InvalidProtocolBufferException;
+import org.apache.flink.com.google.protobuf.Message;
+import org.apache.flink.com.google.protobuf.Parser;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;

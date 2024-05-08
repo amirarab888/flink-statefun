@@ -20,7 +20,7 @@ package org.apache.flink.statefun.sdk.java;
 import java.io.Serializable;
 import java.util.Objects;
 import org.apache.flink.statefun.sdk.java.types.Type;
-import org.apache.flink.statefun.sdk.shaded.com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 
 /**
  * A {@link TypeName} is used to uniquely identify objects within a Stateful Functions application,

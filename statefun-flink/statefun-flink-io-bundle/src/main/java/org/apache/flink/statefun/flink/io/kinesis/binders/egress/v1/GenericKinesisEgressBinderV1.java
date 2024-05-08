@@ -25,7 +25,7 @@ import org.apache.flink.statefun.extensions.ComponentBinder;
 import org.apache.flink.statefun.extensions.ComponentJsonObject;
 import org.apache.flink.statefun.flink.common.json.StateFunObjectMapper;
 import org.apache.flink.statefun.sdk.TypeName;
-import org.apache.flink.statefun.sdk.egress.generated.KinesisEgressRecord;
+import org.apache.flink.egress.generated.KinesisEgressRecord;
 import org.apache.flink.statefun.sdk.spi.StatefulFunctionModule;
 
 /**

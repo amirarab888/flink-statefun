@@ -17,10 +17,10 @@
  */
 package org.apache.flink.statefun.flink.core.message;
 
-import com.google.protobuf.ByteString;
+import org.apache.flink.com.google.protobuf.ByteString;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
-import org.apache.flink.statefun.flink.core.generated.Payload;
+import org.apache.flink.core.generated.Payload;
 
 @NotThreadSafe
 public class MessagePayloadSerializerRaw implements MessagePayloadSerializer {
