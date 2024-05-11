@@ -39,12 +39,6 @@
             <artifactId>protobuf-java</artifactId>
             <version>3.7.1</version>
         </dependency>
-        <!-- Undertow web server -->
-        <dependency>
-            <groupId>io.undertow</groupId>
-            <artifactId>undertow-core</artifactId>
-            <version>1.4.18.Final</version>
-        </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>

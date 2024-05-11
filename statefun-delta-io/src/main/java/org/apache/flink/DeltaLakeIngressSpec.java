@@ -39,7 +39,7 @@ public class DeltaLakeIngressSpec<T> implements IngressSpec<T> {
 
     @Override
     public IngressType type() {
-        return Constants.DELTA_LAKE_INGRESS_TYPE;
+        return DeltaIngressConstants.DELTA_LAKE_INGRESS_TYPE;
     }
 
     public String getDeltaLakeAddress() {
