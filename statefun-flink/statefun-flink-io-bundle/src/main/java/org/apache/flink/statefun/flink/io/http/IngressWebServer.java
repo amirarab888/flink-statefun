@@ -25,7 +25,6 @@ class IngressWebServer {
                         .addHttpListener(port, "0.0.0.0")
                         .setHandler(new IngressHttpHandler(messageQueue))
                         .build();
-        System.out.println("Starting Ingress Web Server at " + port);
         server.start();
     }
 
@@ -42,7 +41,6 @@ class IngressWebServer {
 
         @Override
         public void handleRequest(HttpServerExchange httpServerExchange) {
-            System.out.println("Handling Request: " + httpServerExchange.getRequestURI());
             httpServerExchange.getRequestReceiver().receiveFullBytes(this::onRequestBody);
         }
 

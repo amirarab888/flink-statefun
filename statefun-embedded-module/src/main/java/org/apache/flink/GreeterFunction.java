@@ -14,7 +14,6 @@ import org.apache.flink.statefun.sdk.state.PersistedValue;
 
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 
 public class GreeterFunction implements StatefulFunction {
@@ -27,7 +26,6 @@ public class GreeterFunction implements StatefulFunction {
     @Persisted
     private final PersistedValue<ArrayList> logState = PersistedValue.of("count", ArrayList.class, Expiration.expireAfterWriting(Duration.ofDays(90L)));
 
-    private static AtomicInteger count = new AtomicInteger(0);
     @Override
     public void invoke(Context context, Object greeterRequest) {
         TypedValue message = (TypedValue) greeterRequest;
@@ -35,38 +33,30 @@ public class GreeterFunction implements StatefulFunction {
         if (messageTypeNameString.equals(SEARCH_TYPE.canonicalTypenameString())) {
             handleSearchMessage(context);
         } else if (messageTypeNameString.equals(LOG_TYPE.canonicalTypenameString())) {
-            if (count.incrementAndGet() < 1000) {
-                handleLogMessage(context, message);
-            }
+            handleLogMessage(context, message);
         }
     }
 
     private void handleLogMessage(Context context, TypedValue message) {
         ArrayList stringArrayList = logState.getOrDefault(new ArrayList());
-        System.out.println("Id in logs:" + context.self().id() + " state size: " + stringArrayList.size());
         stringArrayList.add(message.getValue().toStringUtf8());
         logState.set(stringArrayList);
     }
 
     private void handleSearchMessage(Context context) {
         ArrayList<Object> stringArrayList = logState.getOrDefault(new ArrayList());
-        System.out.println("Id in search:" + context.self().id() + " state size: " + stringArrayList.size());
         String result = createResult(stringArrayList);
-        System.out.println("Result created");
         KafkaProducerRecord kafkaProducerRecord = KafkaProducerRecord.newBuilder()
                 .setKey(context.self().id())
                 .setValueBytes(ByteString.copyFromUtf8(result))
                 .setTopic("processed-messages")
                 .build();
-        System.out.println("KafkaProducerRecord created");
         TypedValue typedValue = TypedValue.newBuilder()
                 .setTypenameBytes(ApiExtension.typeNameByteString(KAFKA_PRODUCER_RECORD_TYPENAME))
                 .setValue(kafkaProducerRecord.toByteString())
                 .setHasValue(true)
                 .build();
-        System.out.println("TypedValue created");
         context.send(new EgressIdentifier<>("greeter.io", "processed-messages", TypedValue.class), typedValue);
-        System.out.println("TypedValue sent");
     }
 
     private static String createResult(ArrayList<Object> stringArrayList) {

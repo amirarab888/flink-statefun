@@ -23,13 +23,11 @@ class HttpSource<T> extends RichSourceFunction<T> {
     @Override
     public void open(Configuration parameters) throws Exception {
         super.open(parameters);
-        System.out.println("Opening Http Source Function with port: " + port);
         this.server = new IngressWebServer(port, messageQueue);
     }
 
     @Override
     public void run(SourceContext<T> sourceContext) throws Exception {
-        System.out.println("Running Http Source Function");
         while (running) {
             final AutoRoutable message = messageQueue.poll(50L, TimeUnit.MILLISECONDS);
 
