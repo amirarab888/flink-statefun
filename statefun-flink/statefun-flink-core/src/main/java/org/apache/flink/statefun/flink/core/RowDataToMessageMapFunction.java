@@ -18,12 +18,15 @@ import java.util.List;
 
 public class RowDataToMessageMapFunction extends RichMapFunction<RowData, AutoRoutable> {
     private final String idFieldName;
+    private final String timestampIdFieldName;
     private final RoutingConfig routingConfig;
     private final List<TableFieldConfig> tableFields;
     private final JsonNodeGeneratorFactory nodeGeneratorFactory;
 
-    public RowDataToMessageMapFunction(String idFieldName, RoutingConfig routingConfig, List<TableFieldConfig> tableFields, JsonNodeGeneratorFactory nodeGeneratorFactory) {
+    public RowDataToMessageMapFunction(String idFieldName, String timestampIdFieldName, RoutingConfig routingConfig,
+                                       List<TableFieldConfig> tableFields, JsonNodeGeneratorFactory nodeGeneratorFactory) {
         this.idFieldName = idFieldName;
+        this.timestampIdFieldName = timestampIdFieldName;
         this.routingConfig = routingConfig;
         this.tableFields = tableFields;
         this.nodeGeneratorFactory = nodeGeneratorFactory;
@@ -42,7 +45,7 @@ public class RowDataToMessageMapFunction extends RichMapFunction<RowData, AutoRo
             objectNode.set(name, node);
             if (name.equals(idFieldName)) {
                 id = node.asText();
-            } else if (name.equals("Start_Time_s")) {
+            } else if (name.equals(timestampIdFieldName)) {
                 Timestamp timestamp1 = new Timestamp(Long.parseLong(node.asText()) * 1000);
                 LocalDateTime localDateTime = timestamp1.toLocalDateTime();
                 localDateTime = localDateTime.withMinute(0).withSecond(0).withNano(0);

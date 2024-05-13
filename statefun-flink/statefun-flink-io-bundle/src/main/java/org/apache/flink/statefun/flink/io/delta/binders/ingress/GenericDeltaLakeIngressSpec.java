@@ -33,12 +33,13 @@ public class GenericDeltaLakeIngressSpec {
     private final Optional<String> targetNamespace;
     private final Optional<String> targetName;
     private final Optional<String> idFieldName;
-    private List<TableFieldConfig> tableFields;
+    private final Optional<String> timestampIdFieldName;
+    private final List<TableFieldConfig> tableFields;
 
     private GenericDeltaLakeIngressSpec(IngressIdentifier<Message> id, Optional<String> deltaLakeAddress, Optional<String> valueType,
                                         Optional<String> accessKey, Optional<String> secretKey, Optional<String> tablePath,
                                         Optional<String> targetNamespace, Optional<String> targetName, Optional<String> idFieldName,
-                                        List<TableFieldConfig> tableFields) {
+                                        Optional<String> timestampIdFieldName, List<TableFieldConfig> tableFields) {
         this.id = id;
         this.deltaLakeAddress = deltaLakeAddress;
         this.valueType = valueType;
@@ -48,6 +49,7 @@ public class GenericDeltaLakeIngressSpec {
         this.targetNamespace = targetNamespace;
         this.targetName = targetName;
         this.idFieldName = idFieldName;
+        this.timestampIdFieldName = timestampIdFieldName;
         this.tableFields = tableFields;
     }
 
@@ -65,6 +67,7 @@ public class GenericDeltaLakeIngressSpec {
         targetNamespace.ifPresent(builder::withTargetNamespace);
         targetName.ifPresent(builder::withTargetName);
         idFieldName.ifPresent(builder::withIdFieldName);
+        timestampIdFieldName.ifPresent(builder::withTimestampIdFieldName);
         tableFields.forEach(builder::withTableField);
         return builder.build();
     }
@@ -82,6 +85,7 @@ public class GenericDeltaLakeIngressSpec {
         private Optional<String> targetNamespace = Optional.empty();
         private Optional<String> targetName = Optional.empty();
         private Optional<String> idFieldName = Optional.empty();
+        private Optional<String> timestampIdFieldName = Optional.empty();
         private List<TableFieldConfig> tableFields;
 
         @JsonCreator
@@ -147,6 +151,13 @@ public class GenericDeltaLakeIngressSpec {
             return this;
         }
 
+        @JsonProperty("timestampIdFieldName")
+        public Builder withTimestampIdFieldName(String timestampIdFieldName) {
+            Objects.requireNonNull(timestampIdFieldName);
+            this.timestampIdFieldName = Optional.of(timestampIdFieldName);
+            return this;
+        }
+
         @JsonProperty("tableFields")
         @JsonDeserialize(using = TableFieldConfigsJsonDeserializer.class)
         public Builder withTableFields(List<TableFieldConfig> tableFields) {
@@ -165,6 +176,7 @@ public class GenericDeltaLakeIngressSpec {
                     targetNamespace,
                     targetName,
                     idFieldName,
+                    timestampIdFieldName,
                     tableFields);
         }
 

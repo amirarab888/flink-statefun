@@ -13,13 +13,15 @@ import java.util.List;
 public class DeltaSourceWrapperImpl implements DeltaSourceWrapper {
     private final DeltaSource<RowData> deltaSource;
     private final String idFieldName;
+    private final String timestampIdFieldName;
     private final RoutingConfig routingConfig;
     private final List<TableFieldConfig> tableFields;
 
-    public DeltaSourceWrapperImpl(DeltaSource<RowData> deltaSource, String idFieldName, String namespace,
-                                  String name, String valueType, List<TableFieldConfig> tableFields) {
+    public DeltaSourceWrapperImpl(DeltaSource<RowData> deltaSource, String idFieldName, String timestampIdFieldName,
+                                  String namespace, String name, String valueType, List<TableFieldConfig> tableFields) {
         this.deltaSource = deltaSource;
         this.idFieldName = idFieldName;
+        this.timestampIdFieldName = timestampIdFieldName;
         this.tableFields = tableFields;
         TargetFunctionType targetFunctionType = TargetFunctionType.newBuilder()
                 .setNamespace(namespace)
@@ -40,6 +42,11 @@ public class DeltaSourceWrapperImpl implements DeltaSourceWrapper {
     @Override
     public String getIdFieldName() {
         return idFieldName;
+    }
+
+    @Override
+    public String getTimestampIdFieldName() {
+        return timestampIdFieldName;
     }
 
     @Override

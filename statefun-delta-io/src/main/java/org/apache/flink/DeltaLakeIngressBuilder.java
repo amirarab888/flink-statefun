@@ -17,6 +17,7 @@ public class DeltaLakeIngressBuilder<T> {
     private String targetNamespace;
     private String targetName;
     private String idFieldName;
+    private String timestampIdFieldName;
     private List<TableFieldConfig> tableFields = new ArrayList<>();
 
     private DeltaLakeIngressBuilder(IngressIdentifier<T> id) {
@@ -67,12 +68,17 @@ public class DeltaLakeIngressBuilder<T> {
         return this;
     }
 
+    public DeltaLakeIngressBuilder<T> withTimestampIdFieldName(String timestampIdFieldName) {
+        this.timestampIdFieldName = timestampIdFieldName;
+        return this;
+    }
+
     public DeltaLakeIngressBuilder<T> withTableField(TableFieldConfig tableFieldConfig) {
         this.tableFields.add(tableFieldConfig);
         return this;
     }
 
     public DeltaLakeIngressSpec<T> build() {
-        return new DeltaLakeIngressSpec<>(id, deltaLakeAddress, valueType, accessKey, secretKey, tablePath, targetNamespace, targetName, idFieldName, tableFields);
+        return new DeltaLakeIngressSpec<>(id, deltaLakeAddress, valueType, accessKey, secretKey, tablePath, targetNamespace, targetName, idFieldName, timestampIdFieldName, tableFields);
     }
 }

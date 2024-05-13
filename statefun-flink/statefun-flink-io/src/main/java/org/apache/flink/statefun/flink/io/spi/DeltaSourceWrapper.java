@@ -10,7 +10,11 @@ import java.util.List;
 public interface DeltaSourceWrapper {
 
     DeltaSource<RowData> getDeltaSource();
+
     String getIdFieldName();
+
+    String getTimestampIdFieldName();
+
     RoutingConfig getRoutingConfig();
 
     List<TableFieldConfig> getTableFields();

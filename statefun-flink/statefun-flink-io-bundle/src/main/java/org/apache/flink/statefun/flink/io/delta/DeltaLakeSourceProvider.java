@@ -14,7 +14,7 @@ public class DeltaLakeSourceProvider implements DeltaConnectorSourceProvider {
         DeltaLakeIngressSpec<T> spec = asKafkaSpec(ingressSpec);
         Configuration configuration = getConfiguration(spec.getDeltaLakeAddress(), spec.getAccessKey(), spec.getSecretKey());
         return new DeltaSourceWrapperImpl(DeltaSource.forContinuousRowData(new Path(spec.getTablePath()), configuration).build(),
-                spec.getIdFieldName(),spec.getTargetNamespace(), spec.getTargetName(), spec.getValueType(), spec.getTableFields());
+                spec.getIdFieldName(), spec.getTimestampIdFieldName(), spec.getTargetNamespace(), spec.getTargetName(), spec.getValueType(), spec.getTableFields());
     }
 
     private Configuration getConfiguration(String deltaLakeAddress, String accessKey, String secretKey) {

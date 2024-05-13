@@ -17,10 +17,11 @@ public class DeltaLakeIngressSpec<T> implements IngressSpec<T> {
     private final String targetNamespace;
     private final String targetName;
     private final String idFieldName;
+    private final String timestampIdFieldName;
     private final List<TableFieldConfig> tableFields;
 
     DeltaLakeIngressSpec(IngressIdentifier<T> id, String deltaLakeAddress, String valueType, String accessKey, String secretKey,
-                         String tablePath, String targetNamespace, String targetName, String idFieldName, List<TableFieldConfig> tableFields) {
+                         String tablePath, String targetNamespace, String targetName, String idFieldName, String timestampIdFieldName, List<TableFieldConfig> tableFields) {
         this.ingressIdentifier = Objects.requireNonNull(id);
         this.deltaLakeAddress = deltaLakeAddress;
         this.valueType = valueType;
@@ -30,6 +31,7 @@ public class DeltaLakeIngressSpec<T> implements IngressSpec<T> {
         this.targetNamespace = targetNamespace;
         this.targetName = targetName;
         this.idFieldName = idFieldName;
+        this.timestampIdFieldName = timestampIdFieldName;
         this.tableFields = tableFields;
     }
     @Override
@@ -72,6 +74,10 @@ public class DeltaLakeIngressSpec<T> implements IngressSpec<T> {
 
     public String getIdFieldName() {
         return idFieldName;
+    }
+
+    public String getTimestampIdFieldName() {
+        return timestampIdFieldName;
     }
 
     public List<TableFieldConfig> getTableFields() {
