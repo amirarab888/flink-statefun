@@ -11,6 +11,9 @@ import org.apache.flink.io.generated.AutoRoutable;
 import org.apache.flink.io.generated.RoutingConfig;
 import org.apache.flink.table.data.RowData;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class RowDataToMessageMapFunction extends RichMapFunction<RowData, AutoRoutable> {
@@ -30,6 +33,7 @@ public class RowDataToMessageMapFunction extends RichMapFunction<RowData, AutoRo
     public AutoRoutable map(RowData value) throws Exception {
         ObjectNode objectNode = new ObjectMapper().createObjectNode();
         String id = "";
+        String timeId = "";
         for (TableFieldConfig tableFieldConfig : tableFields) {
             int position = tableFieldConfig.getPosition();
             String name = tableFieldConfig.getName();
@@ -38,10 +42,15 @@ public class RowDataToMessageMapFunction extends RichMapFunction<RowData, AutoRo
             objectNode.set(name, node);
             if (name.equals(idFieldName)) {
                 id = node.asText();
+            } else if (name.equals("Start_Time_s")) {
+                Timestamp timestamp1 = new Timestamp(Long.parseLong(node.asText()) * 1000);
+                LocalDateTime localDateTime = timestamp1.toLocalDateTime();
+                localDateTime = localDateTime.withMinute(0).withSecond(0).withNano(0);
+                timeId = localDateTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
             }
         }
         return AutoRoutable.newBuilder()
-                .setId(id)
+                .setId(id + "," + timeId)
                 .setPayloadBytes(ByteString.copyFromUtf8(objectNode.toString()))
                 .setConfig(routingConfig)
                 .build();
