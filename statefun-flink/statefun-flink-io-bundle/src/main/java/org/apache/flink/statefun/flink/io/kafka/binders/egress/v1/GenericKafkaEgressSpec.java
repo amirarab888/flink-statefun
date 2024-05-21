@@ -46,16 +46,19 @@ final class GenericKafkaEgressSpec {
 
   private final EgressIdentifier<TypedValue> id;
   private final Optional<String> address;
+  private final Optional<String> defaultTopic;
   private final KafkaProducerSemantic producerSemantic;
   private final Properties properties;
 
   private GenericKafkaEgressSpec(
       EgressIdentifier<TypedValue> id,
       Optional<String> address,
+      Optional<String> defaultTopic,
       KafkaProducerSemantic producerSemantic,
       Properties properties) {
     this.id = Objects.requireNonNull(id);
     this.address = Objects.requireNonNull(address);
+    this.defaultTopic = Objects.requireNonNull(defaultTopic);
     this.producerSemantic = Objects.requireNonNull(producerSemantic);
     this.properties = Objects.requireNonNull(properties);
   }
@@ -63,6 +66,7 @@ final class GenericKafkaEgressSpec {
   public KafkaEgressSpec<TypedValue> toUniversalKafkaEgressSpec() {
     final KafkaEgressBuilder<TypedValue> builder = KafkaEgressBuilder.forIdentifier(id);
     address.ifPresent(builder::withKafkaAddress);
+    defaultTopic.ifPresent(builder::withDefaultTopic);
     builder.withProducerSemantic(producerSemantic);
     builder.withProperties(properties);
     builder.withSerializer(GenericKafkaEgressSerializer.class);
@@ -75,6 +79,7 @@ final class GenericKafkaEgressSpec {
     private final EgressIdentifier<TypedValue> id;
 
     private Optional<String> kafkaAddress = Optional.empty();
+    private Optional<String> defaultTopic = Optional.empty();
     private KafkaProducerSemantic producerSemantic = KafkaProducerSemantic.atLeastOnce();
     private Properties properties = new Properties();
 
@@ -89,6 +94,13 @@ final class GenericKafkaEgressSpec {
     public Builder withKafkaAddress(String address) {
       Objects.requireNonNull(address);
       this.kafkaAddress = Optional.of(address);
+      return this;
+    }
+
+    @JsonProperty("defaultTopic")
+    public Builder withDefaultTopic(String defaultTopic) {
+      Objects.requireNonNull(defaultTopic);
+      this.defaultTopic = Optional.of(defaultTopic);
       return this;
     }
 
@@ -107,7 +119,7 @@ final class GenericKafkaEgressSpec {
     }
 
     public GenericKafkaEgressSpec build() {
-      return new GenericKafkaEgressSpec(id, kafkaAddress, producerSemantic, properties);
+      return new GenericKafkaEgressSpec(id, kafkaAddress, defaultTopic, producerSemantic, properties);
     }
   }
 

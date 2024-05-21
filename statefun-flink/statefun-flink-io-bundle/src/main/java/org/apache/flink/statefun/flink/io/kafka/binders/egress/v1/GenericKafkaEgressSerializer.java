@@ -37,9 +37,9 @@ public final class GenericKafkaEgressSerializer implements KafkaEgressSerializer
   private static final long serialVersionUID = 1L;
 
   @Override
-  public ProducerRecord<byte[], byte[]> serialize(TypedValue message) {
+  public ProducerRecord<byte[], byte[]> serialize(TypedValue message, String defaultTopic) {
     KafkaProducerRecord protobufProducerRecord = asKafkaProducerRecord(message);
-    return toProducerRecord(protobufProducerRecord);
+    return toProducerRecord(protobufProducerRecord, defaultTopic);
   }
 
   private static KafkaProducerRecord asKafkaProducerRecord(TypedValue message) {
@@ -57,9 +57,12 @@ public final class GenericKafkaEgressSerializer implements KafkaEgressSerializer
   }
 
   private static ProducerRecord<byte[], byte[]> toProducerRecord(
-      KafkaProducerRecord protobufProducerRecord) {
+      KafkaProducerRecord protobufProducerRecord, String defaultTopic) {
     final String key = protobufProducerRecord.getKey();
-    final String topic = protobufProducerRecord.getTopic();
+    String topic = protobufProducerRecord.getTopic();
+    if (topic == null || topic.isEmpty()) {
+      topic = defaultTopic;
+    }
     final byte[] valueBytes = protobufProducerRecord.getValueBytes().toByteArray();
 
     if (key == null || key.isEmpty()) {

@@ -60,7 +60,7 @@ public class KafkaSinkProvider implements SinkProvider {
 
   private <T> KafkaSerializationSchema<T> serializerFromSpec(KafkaEgressSpec<T> spec) {
     KafkaEgressSerializer<T> serializer = ReflectionUtil.instantiate(spec.serializerClass());
-    return new KafkaSerializationSchemaDelegate<>(serializer);
+    return new KafkaSerializationSchemaDelegate<>(serializer, spec.defaultTopic());
   }
 
   private static <T> Semantic semanticFromSpec(KafkaEgressSpec<T> spec) {

@@ -26,6 +26,7 @@ import org.apache.flink.statefun.sdk.io.EgressSpec;
 public final class KafkaEgressSpec<OutT> implements EgressSpec<OutT> {
   private final Class<? extends KafkaEgressSerializer<OutT>> serializer;
   private final String kafkaAddress;
+  private final String defaultTopic;
   private final Properties properties;
   private final EgressIdentifier<OutT> id;
   private final int kafkaProducerPoolSize;
@@ -35,11 +36,13 @@ public final class KafkaEgressSpec<OutT> implements EgressSpec<OutT> {
       EgressIdentifier<OutT> id,
       Class<? extends KafkaEgressSerializer<OutT>> serializer,
       String kafkaAddress,
+      String defaultTopic,
       Properties properties,
       int kafkaProducerPoolSize,
       KafkaProducerSemantic semantic) {
     this.serializer = Objects.requireNonNull(serializer);
     this.kafkaAddress = Objects.requireNonNull(kafkaAddress);
+    this.defaultTopic = Objects.requireNonNull(defaultTopic);
     this.properties = Objects.requireNonNull(properties);
     this.id = Objects.requireNonNull(id);
     this.kafkaProducerPoolSize = kafkaProducerPoolSize;
@@ -63,6 +66,8 @@ public final class KafkaEgressSpec<OutT> implements EgressSpec<OutT> {
   public String kafkaAddress() {
     return kafkaAddress;
   }
+
+  public String defaultTopic() {return defaultTopic;}
 
   public Properties properties() {
     return properties;

@@ -28,13 +28,15 @@ final class KafkaSerializationSchemaDelegate<T> implements KafkaSerializationSch
   private static final long serialVersionUID = 1L;
 
   private final KafkaEgressSerializer<T> serializer;
+  private final String defaultTopic;
 
-  KafkaSerializationSchemaDelegate(KafkaEgressSerializer<T> serializer) {
+  KafkaSerializationSchemaDelegate(KafkaEgressSerializer<T> serializer, String defaultTopic) {
     this.serializer = Objects.requireNonNull(serializer);
+    this.defaultTopic = Objects.requireNonNull(defaultTopic);
   }
 
   @Override
   public ProducerRecord<byte[], byte[]> serialize(T t, @Nullable Long aLong) {
-    return serializer.serialize(t);
+    return serializer.serialize(t, defaultTopic);
   }
 }
