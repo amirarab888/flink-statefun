@@ -4,17 +4,17 @@ package org.apache.flink.statefun.flink.io.delta;
 import io.delta.flink.source.DeltaSource;
 import org.apache.flink.DeltaLakeIngressSpec;
 import org.apache.flink.core.fs.Path;
-import org.apache.flink.statefun.flink.io.spi.DeltaConnectorSourceProvider;
-import org.apache.flink.statefun.flink.io.spi.DeltaSourceWrapper;
 import org.apache.flink.statefun.sdk.io.IngressSpec;
+import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.hadoop.conf.Configuration;
-public class DeltaLakeSourceProvider implements DeltaConnectorSourceProvider {
+import org.apache.flink.statefun.flink.io.spi.SourceProvider;
+
+public class DeltaLakeSourceProvider implements SourceProvider {
     @Override
-    public <T> DeltaSourceWrapper forSpec(IngressSpec<T> ingressSpec) {
+    public <T> SourceFunction<T> forSpec(IngressSpec<T> ingressSpec) {
         DeltaLakeIngressSpec<T> spec = asKafkaSpec(ingressSpec);
         Configuration configuration = getConfiguration(spec.getDeltaLakeAddress(), spec.getAccessKey(), spec.getSecretKey());
-        return new DeltaSourceWrapperImpl(DeltaSource.forContinuousRowData(new Path(spec.getTablePath()), configuration).build(),
-                spec.getIdFieldName(),spec.getTargetNamespace(), spec.getTargetName(), spec.getValueType(), spec.getTableFields());
+        return new NewSourceFunction<>();
     }
 
     private Configuration getConfiguration(String deltaLakeAddress, String accessKey, String secretKey) {

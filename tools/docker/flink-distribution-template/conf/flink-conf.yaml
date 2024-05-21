@@ -28,8 +28,8 @@ classloader.parent-first-patterns.additional: org.apache.flink.statefun;org.apac
 #==============================================================================
 
 # Uncomment the below to enable checkpointing for your application
-#execution.checkpointing.mode: EXACTLY_ONCE
-#execution.checkpointing.interval: 5sec
+execution.checkpointing.mode: EXACTLY_ONCE
+execution.checkpointing.interval: 5sec
 
 restart-strategy: fixed-delay
 restart-strategy.fixed-delay.attempts: 2147483647
@@ -51,6 +51,8 @@ fs.s3a.path.style.access: true
 fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
 fs.s3a.endpoint: http://192.168.32.51:32003
 pipeline.auto-generate-uids: true
+parallelism.default: 3
+taskmanager.numberOfTaskSlots: 1
 
 taskmanager.state.local.root-dirs: file:///local/state/recovery
 

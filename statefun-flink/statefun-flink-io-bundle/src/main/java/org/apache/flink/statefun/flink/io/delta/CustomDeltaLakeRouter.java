@@ -22,7 +22,7 @@ public class CustomDeltaLakeRouter implements Router<Message> {
         AutoRoutable autoRoutable = (AutoRoutable) message;
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        String key = autoRoutable.getId() + hour;
+        String key = autoRoutable.getId();
         downstream.forward(functionType, key, typedValuePayload(autoRoutable.getConfig().getTypeUrl(), autoRoutable.getPayloadBytes()));
     }
 
