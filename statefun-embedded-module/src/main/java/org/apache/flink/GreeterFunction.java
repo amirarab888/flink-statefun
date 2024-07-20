@@ -49,7 +49,7 @@ public class GreeterFunction implements StatefulFunction {
         KafkaProducerRecord kafkaProducerRecord = KafkaProducerRecord.newBuilder()
                 .setKey(context.self().id())
                 .setValueBytes(ByteString.copyFromUtf8(result))
-                .setTopic("processed-messages")
+                .setTopic("")
                 .build();
         TypedValue typedValue = TypedValue.newBuilder()
                 .setTypenameBytes(ApiExtension.typeNameByteString(KAFKA_PRODUCER_RECORD_TYPENAME))

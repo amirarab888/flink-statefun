@@ -46,16 +46,19 @@ final class GenericKafkaEgressSpec {
 
   private final EgressIdentifier<TypedValue> id;
   private final Optional<String> address;
+  private final Optional<String> defaultTopic;
   private final KafkaProducerSemantic producerSemantic;
   private final Properties properties;
 
   private GenericKafkaEgressSpec(
-      EgressIdentifier<TypedValue> id,
-      Optional<String> address,
-      KafkaProducerSemantic producerSemantic,
-      Properties properties) {
+          EgressIdentifier<TypedValue> id,
+          Optional<String> address,
+          Optional<String> defaultTopic,
+          KafkaProducerSemantic producerSemantic,
+          Properties properties) {
     this.id = Objects.requireNonNull(id);
     this.address = Objects.requireNonNull(address);
+    this.defaultTopic = Objects.requireNonNull(defaultTopic);
     this.producerSemantic = Objects.requireNonNull(producerSemantic);
     this.properties = Objects.requireNonNull(properties);
   }
@@ -63,6 +66,7 @@ final class GenericKafkaEgressSpec {
   public KafkaEgressSpec<TypedValue> toUniversalKafkaEgressSpec() {
     final KafkaEgressBuilder<TypedValue> builder = KafkaEgressBuilder.forIdentifier(id);
     address.ifPresent(builder::withKafkaAddress);
+    defaultTopic.ifPresent(builder::withDefaultTopic);
     builder.withProducerSemantic(producerSemantic);
     builder.withProperties(properties);
     builder.withSerializer(GenericKafkaEgressSerializer.class);
@@ -75,12 +79,13 @@ final class GenericKafkaEgressSpec {
     private final EgressIdentifier<TypedValue> id;
 
     private Optional<String> kafkaAddress = Optional.empty();
+    private Optional<String> defaultTopic = Optional.empty();
     private KafkaProducerSemantic producerSemantic = KafkaProducerSemantic.atLeastOnce();
     private Properties properties = new Properties();
 
     @JsonCreator
     private Builder(
-        @JsonProperty("id") @JsonDeserialize(using = EgressIdentifierJsonDeserializer.class)
+            @JsonProperty("id") @JsonDeserialize(using = EgressIdentifierJsonDeserializer.class)
             EgressIdentifier<TypedValue> id) {
       this.id = Objects.requireNonNull(id);
     }
@@ -89,6 +94,13 @@ final class GenericKafkaEgressSpec {
     public Builder withKafkaAddress(String address) {
       Objects.requireNonNull(address);
       this.kafkaAddress = Optional.of(address);
+      return this;
+    }
+
+    @JsonProperty("defaultTopic")
+    public Builder withDefaultTopic(String defaultTopic) {
+      Objects.requireNonNull(defaultTopic);
+      this.defaultTopic = Optional.of(defaultTopic);
       return this;
     }
 
@@ -107,15 +119,15 @@ final class GenericKafkaEgressSpec {
     }
 
     public GenericKafkaEgressSpec build() {
-      return new GenericKafkaEgressSpec(id, kafkaAddress, producerSemantic, properties);
+      return new GenericKafkaEgressSpec(id, kafkaAddress, defaultTopic, producerSemantic, properties);
     }
   }
 
   private static class ProducerSemanticJsonDeserializer
-      extends JsonDeserializer<KafkaProducerSemantic> {
+          extends JsonDeserializer<KafkaProducerSemantic> {
     @Override
     public KafkaProducerSemantic deserialize(
-        JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
+            JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
       final ObjectNode producerSemanticNode = jsonParser.readValueAs(ObjectNode.class);
       final String semanticTypeString = producerSemanticNode.get("type").asText();
       switch (semanticTypeString) {
@@ -127,9 +139,9 @@ final class GenericKafkaEgressSpec {
           return KafkaProducerSemantic.none();
         default:
           throw new IllegalArgumentException(
-              "Invalid delivery semantic type: "
-                  + semanticTypeString
-                  + "; valid types are [at-least-once, exactly-once, none]");
+                  "Invalid delivery semantic type: "
+                          + semanticTypeString
+                          + "; valid types are [at-least-once, exactly-once, none]");
       }
     }
   }
@@ -138,7 +150,7 @@ final class GenericKafkaEgressSpec {
     // Prefer deprecated millis based timeout for backwards compatibility
     // then fallback to duration based configuration.
     final JsonNode deprecatedTransactionTimeoutMillisNode =
-        producerSemanticNode.get("transactionTimeoutMillis");
+            producerSemanticNode.get("transactionTimeoutMillis");
     if (deprecatedTransactionTimeoutMillisNode != null) {
       return Duration.ofMillis(deprecatedTransactionTimeoutMillisNode.asLong());
     }

@@ -46,21 +46,21 @@ public class KafkaSinkProvider implements SinkProvider {
     Semantic producerSemantic = semanticFromSpec(spec);
     if (producerSemantic == Semantic.EXACTLY_ONCE) {
       properties.setProperty(
-          ProducerConfig.TRANSACTION_TIMEOUT_CONFIG,
-          String.valueOf(spec.semantic().asExactlyOnceSemantic().transactionTimeout().toMillis()));
+              ProducerConfig.TRANSACTION_TIMEOUT_CONFIG,
+              String.valueOf(spec.semantic().asExactlyOnceSemantic().transactionTimeout().toMillis()));
     }
 
     return new FlinkKafkaProducer<>(
-        randomKafkaTopic(),
-        serializerFromSpec(spec),
-        properties,
-        producerSemantic,
-        spec.kafkaProducerPoolSize());
+            randomKafkaTopic(),
+            serializerFromSpec(spec),
+            properties,
+            producerSemantic,
+            spec.kafkaProducerPoolSize());
   }
 
   private <T> KafkaSerializationSchema<T> serializerFromSpec(KafkaEgressSpec<T> spec) {
     KafkaEgressSerializer<T> serializer = ReflectionUtil.instantiate(spec.serializerClass());
-    return new KafkaSerializationSchemaDelegate<>(serializer);
+    return new KafkaSerializationSchemaDelegate<>(serializer, spec.defaultTopic());
   }
 
   private static <T> Semantic semanticFromSpec(KafkaEgressSpec<T> spec) {
@@ -88,6 +88,6 @@ public class KafkaSinkProvider implements SinkProvider {
 
   private static String randomKafkaTopic() {
     return "__stateful_functions_random_topic_"
-        + generateRandomAlphanumericString(ThreadLocalRandom.current(), 16);
+            + generateRandomAlphanumericString(ThreadLocalRandom.current(), 16);
   }
 }

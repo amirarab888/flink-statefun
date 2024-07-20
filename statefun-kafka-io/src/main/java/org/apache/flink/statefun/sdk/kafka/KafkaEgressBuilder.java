@@ -33,6 +33,7 @@ public final class KafkaEgressBuilder<OutT> {
   private final EgressIdentifier<OutT> id;
   private Class<? extends KafkaEgressSerializer<OutT>> serializer;
   private String kafkaAddress;
+  private String defaultTopic;
   private Properties properties = new Properties();
   private int kafkaProducerPoolSize = 5;
   private KafkaProducerSemantic semantic = KafkaProducerSemantic.atLeastOnce();
@@ -47,13 +48,18 @@ public final class KafkaEgressBuilder<OutT> {
    * @return A {@link KafkaIngressBuilder}.
    */
   public static <OutT> KafkaEgressBuilder<OutT> forIdentifier(
-      EgressIdentifier<OutT> egressIdentifier) {
+          EgressIdentifier<OutT> egressIdentifier) {
     return new KafkaEgressBuilder<>(egressIdentifier);
   }
 
   /** @param kafkaAddress Comma separated addresses of the brokers. */
   public KafkaEgressBuilder<OutT> withKafkaAddress(String kafkaAddress) {
     this.kafkaAddress = Objects.requireNonNull(kafkaAddress);
+    return this;
+  }
+
+  public KafkaEgressBuilder<OutT> withDefaultTopic(String defaultTopic) {
+    this.defaultTopic = Objects.requireNonNull(defaultTopic);
     return this;
   }
 
@@ -77,7 +83,7 @@ public final class KafkaEgressBuilder<OutT> {
    *     supporting key/value messages.
    */
   public KafkaEgressBuilder<OutT> withSerializer(
-      Class<? extends KafkaEgressSerializer<OutT>> serializer) {
+          Class<? extends KafkaEgressSerializer<OutT>> serializer) {
     this.serializer = Objects.requireNonNull(serializer);
     return this;
   }
@@ -99,7 +105,7 @@ public final class KafkaEgressBuilder<OutT> {
    * @param transactionTimeoutDuration the transaction timeout.
    */
   public KafkaEgressBuilder<OutT> withExactlyOnceProducerSemantics(
-      Duration transactionTimeoutDuration) {
+          Duration transactionTimeoutDuration) {
     this.semantic = KafkaProducerSemantic.exactlyOnce(transactionTimeoutDuration);
     return this;
   }
@@ -130,6 +136,6 @@ public final class KafkaEgressBuilder<OutT> {
   /** @return An {@link EgressSpec} that can be used in a {@code StatefulFunctionModule}. */
   public KafkaEgressSpec<OutT> build() {
     return new KafkaEgressSpec<>(
-        id, serializer, kafkaAddress, properties, kafkaProducerPoolSize, semantic);
+            id, serializer, kafkaAddress, defaultTopic, properties, kafkaProducerPoolSize, semantic);
   }
 }

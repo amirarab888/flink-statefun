@@ -37,29 +37,32 @@ public final class GenericKafkaEgressSerializer implements KafkaEgressSerializer
   private static final long serialVersionUID = 1L;
 
   @Override
-  public ProducerRecord<byte[], byte[]> serialize(TypedValue message) {
+  public ProducerRecord<byte[], byte[]> serialize(TypedValue message, String defaultTopic) {
     KafkaProducerRecord protobufProducerRecord = asKafkaProducerRecord(message);
-    return toProducerRecord(protobufProducerRecord);
+    return toProducerRecord(protobufProducerRecord, defaultTopic);
   }
 
   private static KafkaProducerRecord asKafkaProducerRecord(TypedValue message) {
     if (!TypedValueUtil.isProtobufTypeOf(message, KafkaProducerRecord.getDescriptor())) {
       throw new IllegalStateException(
-          "The generic Kafka egress expects only messages of type "
-              + KafkaProducerRecord.class.getName());
+              "The generic Kafka egress expects only messages of type "
+                      + KafkaProducerRecord.class.getName());
     }
     try {
       return KafkaProducerRecord.parseFrom(message.getValue());
     } catch (InvalidProtocolBufferException e) {
       throw new RuntimeException(
-          "Unable to unpack message as a " + KafkaProducerRecord.class.getName(), e);
+              "Unable to unpack message as a " + KafkaProducerRecord.class.getName(), e);
     }
   }
 
   private static ProducerRecord<byte[], byte[]> toProducerRecord(
-      KafkaProducerRecord protobufProducerRecord) {
+          KafkaProducerRecord protobufProducerRecord, String defaultTopic) {
     final String key = protobufProducerRecord.getKey();
-    final String topic = protobufProducerRecord.getTopic();
+    String topic = protobufProducerRecord.getTopic();
+    if (topic == null || topic.isEmpty()) {
+      topic = defaultTopic;
+    }
     final byte[] valueBytes = protobufProducerRecord.getValueBytes().toByteArray();
 
     if (key == null || key.isEmpty()) {

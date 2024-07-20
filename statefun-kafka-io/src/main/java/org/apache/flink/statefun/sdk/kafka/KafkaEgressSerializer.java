@@ -34,5 +34,5 @@ public interface KafkaEgressSerializer<OutT> extends Serializable {
    * @param t element to be serialized
    * @return Kafka {@link ProducerRecord}
    */
-  ProducerRecord<byte[], byte[]> serialize(OutT t);
+  ProducerRecord<byte[], byte[]> serialize(OutT t, String defaultTopic);
 }
