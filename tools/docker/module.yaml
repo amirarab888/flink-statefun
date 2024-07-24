@@ -1,0 +1,538 @@
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#kind: io.statefun.endpoints.v2/http
+#spec:
+#  functions: greeter.fns/*
+#  urlPathTemplate: http://greeter-greeter-functions-1:1108/
+#  transport:
+#    type: io.statefun.transports.v1/async
+#---
+kind: io.statefun.delta/ingress
+spec:
+  id: greeter.io/log
+  address: http://192.168.32.51:32003
+  valueType: sqm.types/log
+  accessKey: WDSyPfH5fDh74pHRepAv
+  secretKey: l0oa3gs01G4FgY3xe5ChA4XPWHUaJl70AXOq47IO
+  tablePath: s3a://rza/LakeSamples-2024-07-13/WebFailureCauselakeSample
+  targetNamespace: com.ververica.stateful-functions
+  targetName: greeter
+  idFieldName: MSISDN
+  timestampIdFieldName: Start_Time_s
+  tableFields:
+    - position: 0
+      name: Table_id
+      type: int
+    - position: 1
+      name: Session_ID
+      type: bigint
+    - position: 2
+      name: Interface_ID
+      type: int
+    - position: 3
+      name: Session_Indicator
+      type: int
+    - position: 4
+      name: Start_Time_s
+      type: bigint
+    - position: 5
+      name: Start_Time_ms
+      type: int
+    - position: 6
+      name: End_Time_s
+      type: bigint
+    - position: 7
+      name: End_Time_ms
+      type: int
+    - position: 8
+      name: Protocol_Category
+      type: int
+    - position: 9
+      name: Protocol
+      type: int
+    - position: 10
+      name: Layer_7_Bearer_Protocol
+      type: int
+    - position: 11
+      name: MSISDN
+      type: int
+    - position: 12
+      name: IMSI
+      type: int
+    - position: 13
+      name: IMEI
+      type: int
+    - position: 14
+      name: Roaming_Type
+      type: int
+    - position: 15
+      name: Roaming_Direction
+      type: int
+    - position: 16
+      name: MS_IP_Address
+      type: string
+    - position: 17
+      name: Server_IP_Address
+      type: string
+    - position: 18
+      name: MS_Port
+      type: int
+    - position: 19
+      name: Server_Port
+      type: int
+    - position: 20
+      name: APN
+      type: string
+    - position: 21
+      name: SGSN_Signaling_Plane_IP_Address
+      type: string
+    - position: 22
+      name: GGSN_Signaling_Plane_IP_Address
+      type: string
+    - position: 23
+      name: SGSN_User_Plane_IP_Address
+      type: string
+    - position: 24
+      name: GGSN_User_Plane_IP_Address
+      type: string
+    - position: 25
+      name: MCC
+      type: string
+    - position: 26
+      name: MNC
+      type: string
+    - position: 27
+      name: RAT
+      type: int
+    - position: 28
+      name: LAC
+      type: string
+    - position: 29
+      name: RAC
+      type: string
+    - position: 30
+      name: SAC
+      type: string
+    - position: 31
+      name: CI
+      type: string
+    - position: 32
+      name: Browser_Type
+      type: int
+    - position: 33
+      name: Uplink_Traffic
+      type: bigint
+    - position: 34
+      name: Downlink_Traffic
+      type: bigint
+    - position: 35
+      name: Network_Uplink_Traffic
+      type: bigint
+    - position: 36
+      name: Network_Downlink_Traffic
+      type: bigint
+    - position: 37
+      name: Uplink_Packets
+      type: int
+    - position: 38
+      name: Downlink_Packets
+      type: int
+    - position: 39
+      name: TCP_Connection_Status
+      type: int
+    - position: 40
+      name: TCP_Connection_Release_Status
+      type: int
+    - position: 41
+      name: TCP_Connect_RTT_ms
+      type: bigint
+    - position: 42
+      name: TCP_Uplink_Out_of_Order_Packets
+      type: int
+    - position: 43
+      name: TCP_Downlink_Out_of_Order_Packets
+      type: int
+    - position: 44
+      name: TCP_Uplink_Retransmitted_Packets
+      type: int
+    - position: 45
+      name: TCP_Downlink_Retransmitted_Packets
+      type: int
+    - position: 46
+      name: SYN_ACK_Failures_During_TCP_Handshakes
+      type: int
+    - position: 47
+      name: ACK_Failures_During_TCP_Handshakes
+      type: int
+    - position: 48
+      name: Host_Name
+      type: string
+    - position: 49
+      name: First_URI_Visited
+      type: string
+    - position: 50
+      name: Transaction_Type
+      type: int
+    - position: 51
+      name: First_GET_Success_or_Failure_Flag
+      type: int
+    - position: 52
+      name: First_GET_Transaction_Failure_Cause_Code
+      type: int
+    - position: 53
+      name: First_GET_Response_Delay
+      type: double
+    - position: 54
+      name: GET_Transactions
+      type: int
+    - position: 55
+      name: Successful_GET_Transactions
+      type: int
+    - position: 56
+      name: POST_Transactions
+      type: int
+    - position: 57
+      name: Successful_POST_Transactions
+      type: int
+    - position: 58
+      name: Page_Browsing_Delay
+      type: double
+    - position: 59
+      name: TAC
+      type: string
+    - position: 60
+      name: ECI
+      type: string
+    - position: 61
+      name: TCP_RTT_of_Step_1_ms
+      type: int
+    - position: 62
+      name: TCP_Uplink_Retransmitted_Packets_with_Payload
+      type: int
+    - position: 63
+      name: TCP_Downlink_Retransmitted_Packets_with_Payload
+      type: int
+    - position: 64
+      name: TCP_Uplink_Packets_with_Payload
+      type: int
+    - position: 65
+      name: TCP_Downlink_Packets_with_Payload
+      type: int
+    - position: 66
+      name: RAN_NE_User_Plane_IP_Address
+      type: string
+    - position: 67
+      name: First_DNS_Response_Delay_Within_Page_ms
+      type: double
+    - position: 68
+      name: First_DNS_Response_Code_Within_Page
+      type: int
+    - position: 69
+      name: Page_Size
+      type: int
+    - position: 70
+      name: First_Page_Response_Delay_ms
+      type: double
+    - position: 71
+      name: MCC_of_Home_Carrier
+      type: string
+    - position: 72
+      name: MNC_of_Home_Carrier
+      type: string
+    - position: 73
+      name: User_Agent
+      type: string
+    - position: 74
+      name: Uplink_Valid_Data_Transmission_Duration
+      type: double
+    - position: 75
+      name: Downlink_Valid_Data_Transmission_Duration
+      type: double
+    - position: 76
+      name: Device_Window_Size_Calculations
+      type: int
+    - position: 77
+      name: Device_Side_Small_Window_Times
+      type: int
+    - position: 78
+      name: Delay_Between_First_TCP_and_First_GET_ms
+      type: int
+    - position: 79
+      name: Delay_Between_First_GET_ACK_and_First_Data_Packet_ms
+      type: int
+    - position: 80
+      name: Average_Uplink_RTT
+      type: int
+    - position: 81
+      name: Average_Downlink_RTT
+      type: int
+    - position: 82
+      name: Number_of_Timer_Average_Uplink_RTT_Is_Longer_Than_500_ms
+      type: int
+    - position: 83
+      name: Number_of_Timer_Average_Downlink_RTT_Is_Longer_Than_1s
+      type: int
+    - position: 84
+      name: Uplink_RTT_Calculations
+      type: int
+    - position: 85
+      name: Downlink_RTT_Calculations
+      type: int
+    - position: 86
+      name: User_Side_Uplink_Lost_Packets
+      type: int
+    - position: 87
+      name: Server_Side_Uplink_Lost_Packets
+      type: int
+    - position: 88
+      name: Server_Side_Downlink_Lost_Packets
+      type: int
+    - position: 89
+      name: User_Side_Downlink_Lost_Packets
+      type: int
+    - position: 90
+      name: Downlink_TCP_Send_Window_Average_Size
+      type: int
+    - position: 91
+      name: Total_Downlink_TCP_Send_Window_Size_Calculations
+      type: int
+    - position: 92
+      name: Downlink_Maximum_TCP_Send_Window_Size
+      type: int
+    - position: 93
+      name: Total_Uplink_TCP_Send_Window_Average_Size
+      type: int
+    - position: 94
+      name: Total_Uplink_TCP_Send_Window_Size_Calculations
+      type: int
+    - position: 95
+      name: Uplink_Maximum_TCP_Send_Window_Size
+      type: int
+    - position: 96
+      name: Downlink_Continuous_Retransmission_Delay
+      type: bigint
+    - position: 97
+      name: User_Side_Hungry_Delay
+      type: bigint
+    - position: 98
+      name: Server_Side_Hunger_Delay
+      type: bigint
+    - position: 99
+      name: Signaling_Consumption_Flag_Signaling_Messages
+      type: int
+    - position: 100
+      name: First_RAT
+      type: int
+    - position: 101
+      name: Probe_Protocol
+      type: int
+    - position: 102
+      name: Visit_Type
+      type: int
+    - position: 103
+      name: Uplink_Valid_Traffic
+      type: bigint
+    - position: 104
+      name: Time_Zone
+      type: int
+    - position: 105
+      name: DST_Offset
+      type: int
+    - position: 106
+      name: Negotiated_Allocation_Retention_Priority
+      type: int
+    - position: 107
+      name: Allowed_Uplink_Maximum_Bit_Rate
+      type: int
+    - position: 108
+      name: Allowed_Downlink_Maximum_Bit_Rate
+      type: int
+    - position: 109
+      name: Negotiated_Traffic_Class
+      type: int
+    - position: 110
+      name: Negotiated_Handling_Traffic_Priority
+      type: int
+    - position: 111
+      name: Negotiated_QoS_Class_Identifier
+      type: int
+    - position: 112
+      name: Total_TCP_Connect_RTT_ms
+      type: bigint
+    - position: 113
+      name: Total_TCP_RTT_of_Step_1_ms
+      type: bigint
+    - position: 114
+      name: APP_ID
+      type: string
+    - position: 115
+      name: probe_ID
+      type: string
+    - position: 116
+      name: Record_type
+      type: string
+    - position: 117
+      name: TCP_Uplink_Payload_Traffic
+      type: string
+    - position: 118
+      name: TCP_Downlink_Payload_Traffic
+      type: string
+    - position: 119
+      name: PAGE_SUCCEED_FLAG
+      type: int
+    - position: 120
+      name: PAGE_SR_SUCCEED_FLAG
+      type: string
+    - position: 121
+      name: SP
+      type: string
+    - position: 122
+      name: FIRSTDNSSUCFLAG
+      type: int
+    - position: 123
+      name: UFDR_Type
+      type: string
+    - position: 124
+      name: DL_TRANS_DELAY
+      type: string
+    - position: 125
+      name: UL_TRANS_DELAY
+      type: string
+    - position: 126
+      name: AVG_UL_RTT_MICRO_SEC
+      type: string
+    - position: 127
+      name: AVG_DW_RTT_MICRO_SEC
+      type: string
+    - position: 128
+      name: ERROR_CODE_4xx_TIMES
+      type: bigint
+    - position: 129
+      name: ERROR_CODE_5xx_TIMES
+      type: bigint
+    - position: 130
+      name: GET_TIMEOUT_NUM
+      type: bigint
+    - position: 131
+      name: POST_TO_NUM
+      type: bigint
+    - position: 132
+      name: Flag
+      type: int
+    - position: 133
+      name: RECORD_DATE
+      type: timestamp
+    - position: 134
+      name: day
+      type: timestamp
+    - position: 135
+      name: City
+      type: string
+    - position: 136
+      name: Province
+      type: string
+    - position: 137
+      name: Region
+      type: string
+    - position: 138
+      name: Country
+      type: string
+    - position: 139
+      name: Protocol_name
+      type: string
+    - position: 140
+      name: Protocol_Category_name
+      type: string
+    - position: 141
+      name: TER_BRAND_NAME
+      type: string
+    - position: 142
+      name: TER_MODEL_NAME
+      type: string
+    - position: 143
+      name: TER_MODENAME
+      type: string
+    - position: 144
+      name: TER_TYPE_NAME_EN
+      type: string
+    - position: 145
+      name: TER_OS_TYPE_NAME
+      type: string
+    - position: 146
+      name: SGSN
+      type: string
+    - position: 147
+      name: SGSN_POOL
+      type: string
+    - position: 148
+      name: GGSN
+      type: string
+    - position: 149
+      name: SGW
+      type: string
+    - position: 150
+      name: PGW
+      type: string
+    - position: 151
+      name: eNodeB_Name
+      type: string
+    - position: 152
+      name: Cell_Name
+      type: string
+    - position: 153
+      name: RNC_Name
+      type: string
+    - position: 154
+      name: NodeB_Name
+      type: string
+    - position: 155
+      name: BSC_Name
+      type: string
+    - position: 156
+      name: BTS_Name
+      type: string
+    - position: 157
+      name: Longitude
+      type: string
+    - position: 158
+      name: Latitude
+      type: string
+    - position: 159
+      name: Service_Area_Name
+      type: string
+---
+kind: io.statefun.kafka.v1/ingress
+spec:
+  id: greeter.io/search
+  address: http://192.168.32.52:30009
+  consumerGroupId: greeter
+  startupPosition:
+    type: earliest
+  topics:
+    - topic: searchsqm
+      valueType: sqm.types/search
+      targets:
+        - com.ververica.stateful-functions/greeter
+---
+kind: io.statefun.kafka.v1/egress
+spec:
+  id: greeter.io/processed-messages
+  properties:
+    - max.request.size: 104857600
+  address: http://192.168.32.52:30009
+  deliverySemantic:
+    type: at-least-once
+  defaultTopic: rezareza2

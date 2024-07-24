@@ -13,7 +13,6 @@ import org.apache.flink.statefun.sdk.state.Expiration;
 import org.apache.flink.statefun.sdk.state.PersistedAppendingBuffer;
 
 import java.time.Duration;
-import java.util.Iterator;
 
 
 public class GreeterFunction implements StatefulFunction {
@@ -59,9 +58,7 @@ public class GreeterFunction implements StatefulFunction {
     private static String createResult(Iterable<String> stringArrayList) {
         StringBuilder result = new StringBuilder("[");
         boolean first = true;
-        Iterator<String> strings = stringArrayList.iterator();
-        while(strings.hasNext()) {
-            String next = strings.next();
+        for (String next : stringArrayList) {
             if (first) {
                 first = false;
             } else {
