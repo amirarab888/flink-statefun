@@ -10,10 +10,10 @@ import org.apache.flink.statefun.sdk.annotations.Persisted;
 import org.apache.flink.statefun.sdk.io.EgressIdentifier;
 import org.apache.flink.statefun.sdk.java.ApiExtension;
 import org.apache.flink.statefun.sdk.state.Expiration;
-import org.apache.flink.statefun.sdk.state.PersistedValue;
+import org.apache.flink.statefun.sdk.state.PersistedAppendingBuffer;
 
 import java.time.Duration;
-import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class GreeterFunction implements StatefulFunction {
@@ -24,27 +24,24 @@ public class GreeterFunction implements StatefulFunction {
     private static final TypeName SEARCH_TYPE = new TypeName(SQM_NAMESPACE, "search");
     private static final TypeName LOG_TYPE = new TypeName(SQM_NAMESPACE, "log");
     @Persisted
-    private final PersistedValue<ArrayList> logState = PersistedValue.of("count", ArrayList.class, Expiration.expireAfterWriting(Duration.ofDays(90L)));
-
+    private final PersistedAppendingBuffer<String> logState2 = PersistedAppendingBuffer.of("count", String.class, Expiration.expireAfterWriting(Duration.ofDays(90L)));
     @Override
     public void invoke(Context context, Object greeterRequest) {
         TypedValue message = (TypedValue) greeterRequest;
         String messageTypeNameString = message.getTypename();
-        if (messageTypeNameString.equals(SEARCH_TYPE.canonicalTypenameString())) {
+        if (messageTypeNameString.equals(LOG_TYPE.canonicalTypenameString())) {
+            handleLogMessage(message);
+        } else if (messageTypeNameString.equals(SEARCH_TYPE.canonicalTypenameString())) {
             handleSearchMessage(context);
-        } else if (messageTypeNameString.equals(LOG_TYPE.canonicalTypenameString())) {
-            handleLogMessage(context, message);
         }
     }
 
-    private void handleLogMessage(Context context, TypedValue message) {
-        ArrayList stringArrayList = logState.getOrDefault(new ArrayList());
-        stringArrayList.add(message.getValue().toStringUtf8());
-        logState.set(stringArrayList);
+    private void handleLogMessage(TypedValue message) {
+        logState2.append(message.getValue().toStringUtf8());
     }
 
     private void handleSearchMessage(Context context) {
-        ArrayList<Object> stringArrayList = logState.getOrDefault(new ArrayList());
+        Iterable<String> stringArrayList = logState2.view();
         String result = createResult(stringArrayList);
         KafkaProducerRecord kafkaProducerRecord = KafkaProducerRecord.newBuilder()
                 .setKey(context.self().id())
@@ -59,13 +56,18 @@ public class GreeterFunction implements StatefulFunction {
         context.send(new EgressIdentifier<>("greeter.io", "processed-messages", TypedValue.class), typedValue);
     }
 
-    private static String createResult(ArrayList<Object> stringArrayList) {
+    private static String createResult(Iterable<String> stringArrayList) {
         StringBuilder result = new StringBuilder("[");
-        for (int i = 0; i < stringArrayList.size(); i++) {
-            if (i != 0) {
+        boolean first = true;
+        Iterator<String> strings = stringArrayList.iterator();
+        while(strings.hasNext()) {
+            String next = strings.next();
+            if (first) {
+                first = false;
+            } else {
                 result.append(", ");
             }
-            result.append(stringArrayList.get(i).toString());
+            result.append(next);
         }
         result.append("]");
         return result.toString();
