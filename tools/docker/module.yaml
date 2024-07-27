@@ -27,7 +27,7 @@ spec:
   valueType: sqm.types/log
   accessKey: WDSyPfH5fDh74pHRepAv
   secretKey: l0oa3gs01G4FgY3xe5ChA4XPWHUaJl70AXOq47IO
-  tablePath: s3a://rza/LakeSamples-2024-07-13/WebFailureCauselakeSample
+  tablePath: s3a://newest/weblakedump20240721
   targetNamespace: com.ververica.stateful-functions
   targetName: greeter
   idFieldName: MSISDN
@@ -535,4 +535,4 @@ spec:
   address: http://192.168.32.52:30009
   deliverySemantic:
     type: at-least-once
-  defaultTopic: rezareza2
+  defaultTopic: delta_messages
