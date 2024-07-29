@@ -54,7 +54,7 @@ pipeline.auto-generate-uids: true
 
 taskmanager.state.local.root-dirs: file:///local/state/recovery
 taskmanager.memory.managed.fraction: 0.8
-#parallelism.default: 30
+parallelism.default: 10
 
 #==============================================================================
 # Recommended memory configurations. Users may change according to their needs.
@@ -62,7 +62,7 @@ taskmanager.memory.managed.fraction: 0.8
 
 jobmanager.memory.process.size: 1356m
 taskmanager.memory.process.size: 20g
-#taskmanager.numberOfTaskSlots: 30
+taskmanager.numberOfTaskSlots: 10
 
 #==============================================================================
 # Support easy upgrades as the module.yaml file updates

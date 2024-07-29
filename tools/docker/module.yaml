@@ -27,7 +27,7 @@ spec:
   valueType: sqm.types/log
   accessKey: WDSyPfH5fDh74pHRepAv
   secretKey: l0oa3gs01G4FgY3xe5ChA4XPWHUaJl70AXOq47IO
-  tablePath: s3a://newest/weblakedump20240721
+  tablePath: s3a://newestnewest/weblakedump20240727/weblakedump20240727
   targetNamespace: com.ververica.stateful-functions
   targetName: greeter
   idFieldName: MSISDN
